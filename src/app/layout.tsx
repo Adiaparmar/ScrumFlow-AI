@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Sidebar, TopHeader } from '@/components/Navigation';
+import AppShell from '@/components/AppShell';
 
 export const metadata: Metadata = {
   title: 'ScrumFlow.ai – AI-Powered Scrum Intelligence',
@@ -23,12 +23,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <div className="app-shell">
-          <Sidebar />
-          <div className="main-content">
-            {children}
-          </div>
-        </div>
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );

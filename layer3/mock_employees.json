@@ -1,0 +1,340 @@
+{
+    "employees": [
+        {
+            "employee_id": "E-01",
+            "name": "Rahul Mehta",
+            "role": "Tech Lead",
+            "skills": [
+                "backend",
+                "system-design",
+                "architecture",
+                "Python",
+                "FastAPI",
+                "PostgreSQL",
+                "Redis",
+                "rate-limiting",
+                "API",
+                "code-review",
+                "CI-CD",
+                "Docker"
+            ],
+            "current_tasks": 2,
+            "current_load_hours_week": 30,
+            "capacity_hours_week": 40,
+            "historical_completion_rate": 0.91,
+            "completed_task_types": [
+                "backend",
+                "API",
+                "architecture",
+                "infrastructure",
+                "rate-limiting"
+            ]
+        },
+        {
+            "employee_id": "E-02",
+            "name": "Priya Sharma",
+            "role": "Backend Engineer",
+            "skills": [
+                "backend",
+                "Python",
+                "FastAPI",
+                "PostgreSQL",
+                "Redis",
+                "rate-limiting",
+                "API",
+                "database-migration",
+                "SQL",
+                "Nginx"
+            ],
+            "current_tasks": 3,
+            "current_load_hours_week": 28,
+            "capacity_hours_week": 40,
+            "historical_completion_rate": 0.87,
+            "completed_task_types": [
+                "backend",
+                "API",
+                "database-migration",
+                "rate-limiting",
+                "Nginx"
+            ]
+        },
+        {
+            "employee_id": "E-03",
+            "name": "Ankit Verma",
+            "role": "DevOps Engineer",
+            "skills": [
+                "DevOps",
+                "CI-CD",
+                "Docker",
+                "Kubernetes",
+                "Redis",
+                "Nginx",
+                "infrastructure",
+                "monitoring",
+                "rollback",
+                "staging",
+                "Linux",
+                "shell-scripting",
+                "GitHub-Actions"
+            ],
+            "current_tasks": 3,
+            "current_load_hours_week": 32,
+            "capacity_hours_week": 40,
+            "historical_completion_rate": 0.84,
+            "completed_task_types": [
+                "infrastructure",
+                "CI-CD",
+                "DevOps",
+                "monitoring",
+                "staging"
+            ]
+        },
+        {
+            "employee_id": "E-04",
+            "name": "Sara Iyer",
+            "role": "Systems Architect",
+            "skills": [
+                "architecture",
+                "system-design",
+                "backend",
+                "API",
+                "distributed-systems",
+                "security",
+                "rate-limiting",
+                "database-migration",
+                "PostgreSQL",
+                "Redis",
+                "load-balancing",
+                "Nginx"
+            ],
+            "current_tasks": 1,
+            "current_load_hours_week": 16,
+            "capacity_hours_week": 40,
+            "historical_completion_rate": 0.94,
+            "completed_task_types": [
+                "architecture",
+                "system-design",
+                "API",
+                "security",
+                "distributed-systems"
+            ]
+        },
+        {
+            "employee_id": "E-05",
+            "name": "Vikram Nair",
+            "role": "Backend Engineer",
+            "skills": [
+                "backend",
+                "Node.js",
+                "Express",
+                "MongoDB",
+                "PostgreSQL",
+                "API",
+                "REST",
+                "authentication",
+                "JWT",
+                "Python"
+            ],
+            "current_tasks": 2,
+            "current_load_hours_week": 24,
+            "capacity_hours_week": 40,
+            "historical_completion_rate": 0.82,
+            "completed_task_types": [
+                "backend",
+                "API",
+                "authentication",
+                "REST"
+            ]
+        },
+        {
+            "employee_id": "E-06",
+            "name": "Neha Joshi",
+            "role": "Frontend Engineer",
+            "skills": [
+                "frontend",
+                "React",
+                "TypeScript",
+                "JavaScript",
+                "CSS",
+                "UI-components",
+                "data-visualization",
+                "charts",
+                "REST-integration"
+            ],
+            "current_tasks": 2,
+            "current_load_hours_week": 22,
+            "capacity_hours_week": 40,
+            "historical_completion_rate": 0.89,
+            "completed_task_types": [
+                "frontend",
+                "React",
+                "UI-components",
+                "data-visualization"
+            ]
+        },
+        {
+            "employee_id": "E-07",
+            "name": "Arjun Kapoor",
+            "role": "Frontend Engineer",
+            "skills": [
+                "frontend",
+                "React",
+                "TypeScript",
+                "JavaScript",
+                "Next.js",
+                "CSS",
+                "performance-optimization",
+                "REST-integration",
+                "testing"
+            ],
+            "current_tasks": 3,
+            "current_load_hours_week": 36,
+            "capacity_hours_week": 40,
+            "historical_completion_rate": 0.80,
+            "completed_task_types": [
+                "frontend",
+                "React",
+                "Next.js",
+                "performance-optimization"
+            ]
+        },
+        {
+            "employee_id": "E-08",
+            "name": "Deepika Singh",
+            "role": "QA Engineer",
+            "skills": [
+                "testing",
+                "integration-tests",
+                "API-testing",
+                "CI-CD",
+                "test-automation",
+                "Pytest",
+                "Postman",
+                "regression-testing",
+                "load-testing",
+                "documentation"
+            ],
+            "current_tasks": 2,
+            "current_load_hours_week": 20,
+            "capacity_hours_week": 40,
+            "historical_completion_rate": 0.93,
+            "completed_task_types": [
+                "testing",
+                "integration-tests",
+                "API-testing",
+                "CI-CD",
+                "test-automation"
+            ]
+        },
+        {
+            "employee_id": "E-09",
+            "name": "Mohit Gupta",
+            "role": "Data Engineer",
+            "skills": [
+                "data-engineering",
+                "Python",
+                "SQL",
+                "PostgreSQL",
+                "ETL",
+                "database-migration",
+                "analytics",
+                "Pandas",
+                "data-pipelines",
+                "schema-design"
+            ],
+            "current_tasks": 1,
+            "current_load_hours_week": 18,
+            "capacity_hours_week": 40,
+            "historical_completion_rate": 0.85,
+            "completed_task_types": [
+                "data-engineering",
+                "database-migration",
+                "ETL",
+                "schema-design"
+            ]
+        },
+        {
+            "employee_id": "E-10",
+            "name": "Ritu Agarwal",
+            "role": "Backend Engineer",
+            "skills": [
+                "backend",
+                "Python",
+                "Django",
+                "PostgreSQL",
+                "REST",
+                "authentication",
+                "API",
+                "caching",
+                "Redis"
+            ],
+            "current_tasks": 4,
+            "current_load_hours_week": 38,
+            "capacity_hours_week": 40,
+            "historical_completion_rate": 0.78,
+            "completed_task_types": [
+                "backend",
+                "API",
+                "authentication",
+                "caching"
+            ]
+        },
+        {
+            "employee_id": "E-11",
+            "name": "Karan Malhotra",
+            "role": "DevOps Engineer",
+            "skills": [
+                "DevOps",
+                "CI-CD",
+                "Docker",
+                "Kubernetes",
+                "monitoring",
+                "Prometheus",
+                "Grafana",
+                "alerting",
+                "GitHub-Actions",
+                "integration-tests",
+                "staging",
+                "infrastructure"
+            ],
+            "current_tasks": 2,
+            "current_load_hours_week": 26,
+            "capacity_hours_week": 40,
+            "historical_completion_rate": 0.88,
+            "completed_task_types": [
+                "DevOps",
+                "CI-CD",
+                "monitoring",
+                "infrastructure",
+                "integration-tests"
+            ]
+        },
+        {
+            "employee_id": "E-12",
+            "name": "Aditya Patel",
+            "role": "Backend Engineer",
+            "skills": [
+                "backend",
+                "Python",
+                "FastAPI",
+                "PostgreSQL",
+                "API",
+                "microservices",
+                "Docker",
+                "REST",
+                "database-migration",
+                "SQL"
+            ],
+            "current_tasks": 1,
+            "current_load_hours_week": 12,
+            "capacity_hours_week": 40,
+            "historical_completion_rate": 0.83,
+            "completed_task_types": [
+                "backend",
+                "API",
+                "microservices",
+                "database-migration"
+            ]
+        }
+    ]
+}

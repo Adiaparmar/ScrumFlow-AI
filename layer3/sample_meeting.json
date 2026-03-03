@@ -1,0 +1,382 @@
+{
+    "conversation": [
+        {
+            "speaker_id": "SPEAKER_00",
+            "speaker_label": "Speaker 0",
+            "start_time": 0.4,
+            "end_time": 6.1,
+            "text": "Hello everyone, I'm Rahul, I'll be running today's sprint review."
+        },
+        {
+            "speaker_id": "SPEAKER_01",
+            "speaker_label": "Speaker 1",
+            "start_time": 6.5,
+            "end_time": 10.3,
+            "text": "Hey team, my name is Priya, working on the backend."
+        },
+        {
+            "speaker_id": "SPEAKER_02",
+            "speaker_label": "Speaker 2",
+            "start_time": 10.7,
+            "end_time": 14.2,
+            "text": "Namaste, main Ankit hoon, DevOps side se."
+        },
+        {
+            "speaker_id": "SPEAKER_03",
+            "speaker_label": "Speaker 3",
+            "start_time": 14.5,
+            "end_time": 18.1,
+            "text": "Hi, myself Sara, systems architect."
+        },
+        {
+            "speaker_id": "SPEAKER_00",
+            "speaker_label": "Speaker 0",
+            "start_time": 20.0,
+            "end_time": 32.4,
+            "text": "Theek hai sablog, sprint review start karte hain. Is sprint mein humne 34 story points complete kiye the, target 40 ka tha. Velocity thodi kam rahi — iska kya karan hai?"
+        },
+        {
+            "speaker_id": "SPEAKER_01",
+            "speaker_label": "Speaker 1",
+            "start_time": 31.8,
+            "end_time": 32.6,
+            "text": "Haan"
+        },
+        {
+            "speaker_id": "SPEAKER_01",
+            "speaker_label": "Speaker 1",
+            "start_time": 33.1,
+            "end_time": 51.7,
+            "text": "Rahul bhai, main main uh batata hoon. API Gateway ka redesign expect se zyada time le gaya. Token bucket implementation mein edge cases the jo humne planning mein anticipate nahi kiye the."
+        },
+        {
+            "speaker_id": "SPEAKER_02",
+            "speaker_label": "Speaker 2",
+            "start_time": 50.9,
+            "end_time": 52.1,
+            "text": "Hmm"
+        },
+        {
+            "speaker_id": "SPEAKER_02",
+            "speaker_label": "Speaker 2",
+            "start_time": 52.4,
+            "end_time": 65.3,
+            "text": "Aur infra side se bhi blocker tha — staging pe Redis cluster config complete nahi tha. Iske wajah se Priya ka testing ruk gaya tha almost 3 din tak."
+        },
+        {
+            "speaker_id": "SPEAKER_01",
+            "speaker_label": "Speaker 1",
+            "start_time": 64.8,
+            "end_time": 65.9,
+            "text": "Haan bilkul."
+        },
+        {
+            "speaker_id": "SPEAKER_00",
+            "speaker_label": "Speaker 0",
+            "start_time": 66.5,
+            "end_time": 76.2,
+            "text": "Okay yeh serious hai. Ankit, Redis cluster ka staging setup ab kab tak ho jayega? Aur kya iska production timeline pe impact padega?"
+        },
+        {
+            "speaker_id": "SPEAKER_02",
+            "speaker_label": "Speaker 2",
+            "start_time": 75.9,
+            "end_time": 88.4,
+            "text": "Main Wednesday tak staging pe Redis Cluster mode configure kar dunga. Production ke liye ek rollback plan bhi banana padega — woh bhi Wednesday tak ready kar dunga."
+        },
+        {
+            "speaker_id": "SPEAKER_00",
+            "speaker_label": "Speaker 0",
+            "start_time": 88.0,
+            "end_time": 88.7,
+            "text": ""
+        },
+        {
+            "speaker_id": "SPEAKER_00",
+            "speaker_label": "Speaker 0",
+            "start_time": 89.1,
+            "end_time": 89.4,
+            "text": "..."
+        },
+        {
+            "speaker_id": "SPEAKER_01",
+            "speaker_label": "Speaker 1",
+            "start_time": 90.0,
+            "end_time": 102.5,
+            "text": "Toh ab rate limiting ke baare mein final decision lete hain — token bucket ya leaky bucket? Maine dono compare kiya hai."
+        },
+        {
+            "speaker_id": "SPEAKER_01",
+            "speaker_label": "Speaker 1",
+            "start_time": 102.5,
+            "end_time": 110.8,
+            "text": "Token bucket burst traffic better handle karta hai aur hamare use case ke liye clearly better fit hai."
+        },
+        {
+            "speaker_id": "SPEAKER_03",
+            "speaker_label": "Speaker 3",
+            "start_time": 109.4,
+            "end_time": 110.2,
+            "text": "Right"
+        },
+        {
+            "speaker_id": "SPEAKER_03",
+            "speaker_label": "Speaker 3",
+            "start_time": 111.3,
+            "end_time": 126.7,
+            "text": "Main bhi agree karti hoon — token bucket clearly better hai burst scenarios ke liye. Leaky bucket mein hum unnecessarily throttle karenge legitimate spikes ko. Kya team iss par agree hai?"
+        },
+        {
+            "speaker_id": "SPEAKER_01",
+            "speaker_label": "Speaker 1",
+            "start_time": 125.9,
+            "end_time": 126.8,
+            "text": "Agreed."
+        },
+        {
+            "speaker_id": "SPEAKER_00",
+            "speaker_label": "Speaker 0",
+            "start_time": 127.2,
+            "end_time": 137.4,
+            "text": "Toh decided — token bucket rate limiting implement karenge Nginx edge layer pe with configurable burst window of 10 seconds."
+        },
+        {
+            "speaker_id": "SPEAKER_01",
+            "speaker_label": "Speaker 1",
+            "start_time": 138.1,
+            "end_time": 152.6,
+            "text": "Main Thursday tak rate limiter implement kar dungi with configurable per-client limits. X-RateLimit response headers bhi add karungi — X-RateLimit-Limit, X-RateLimit-Remaining."
+        },
+        {
+            "speaker_id": "SPEAKER_02",
+            "speaker_label": "Speaker 2",
+            "start_time": 150.8,
+            "end_time": 163.1,
+            "text": "Aur while we're at it, kya hum distributed tracing bhi add kar sakte hain iss sprint mein? OpenTelemetry integration already backlog mein hai."
+        },
+        {
+            "speaker_id": "SPEAKER_03",
+            "speaker_label": "Speaker 3",
+            "start_time": 162.3,
+            "end_time": 162.9,
+            "text": "Nahi nahi"
+        },
+        {
+            "speaker_id": "SPEAKER_03",
+            "speaker_label": "Speaker 3",
+            "start_time": 163.5,
+            "end_time": 175.4,
+            "text": "Ankit, distributed tracing important hai but yeh is sprint ke scope se bahar hai. Isko next sprint mein rakhna chahiye. Sprint goal dilute ho jayega."
+        },
+        {
+            "speaker_id": "SPEAKER_00",
+            "speaker_label": "Speaker 0",
+            "start_time": 176.0,
+            "end_time": 185.8,
+            "text": "Sara sahi keh rahi hai. Distributed tracing next sprint mein jaayega. Ab database migration ke baare mein baat karte hain."
+        },
+        {
+            "speaker_id": "SPEAKER_02",
+            "speaker_label": "Speaker 2",
+            "start_time": 184.9,
+            "end_time": 185.3,
+            "text": "[inaudible]"
+        },
+        {
+            "speaker_id": "SPEAKER_01",
+            "speaker_label": "Speaker 1",
+            "start_time": 186.3,
+            "end_time": 201.7,
+            "text": "DB migration Phase 2 mein ek critical blocker aa gaya hai. Existing schema mein ek foreign key constraint hai jo migration script handle nahi kar raha. Agar force karte hain toh production data corruption ka risk hai."
+        },
+        {
+            "speaker_id": "SPEAKER_00",
+            "speaker_label": "Speaker 0",
+            "start_time": 200.9,
+            "end_time": 201.4,
+            "text": "Oh"
+        },
+        {
+            "speaker_id": "SPEAKER_03",
+            "speaker_label": "Speaker 3",
+            "start_time": 202.5,
+            "end_time": 215.8,
+            "text": "Yeh bahut serious hai. Data corruption risk ke sath hum Phase 2 is sprint mein bilkul nahi karenge. Clearly Phase 2 next sprint tak push hona chahiye."
+        },
+        {
+            "speaker_id": "SPEAKER_00",
+            "speaker_label": "Speaker 0",
+            "start_time": 215.3,
+            "end_time": 216.1,
+            "text": "Haan."
+        },
+        {
+            "speaker_id": "SPEAKER_00",
+            "speaker_label": "Speaker 0",
+            "start_time": 216.5,
+            "end_time": 230.3,
+            "text": "Haan Phase 2 push karna padega. Priya, kya tum foreign key constraint issue investigate karke ek fix proposal taiyar kar sakti ho Friday tak?"
+        },
+        {
+            "speaker_id": "SPEAKER_01",
+            "speaker_label": "Speaker 1",
+            "start_time": 229.8,
+            "end_time": 242.4,
+            "text": "Haan main Friday tak detailed analysis aur fix proposal ready kar dungi. Data migration dry run bhi karungi staging pe pehle."
+        },
+        {
+            "speaker_id": "SPEAKER_02",
+            "speaker_label": "Speaker 2",
+            "start_time": 242.0,
+            "end_time": 242.8,
+            "text": "   "
+        },
+        {
+            "speaker_id": "SPEAKER_02",
+            "speaker_label": "Speaker 2",
+            "start_time": 244.0,
+            "end_time": 258.3,
+            "text": "Ek aur concern — hamare paas is sprint mein bahut kaam hai aur team already stretched hai. Priya rate limiter kar rahi hai, DB blocker investigate kar rahi hai, aur main Redis aur rollback plan bana raha hoon."
+        },
+        {
+            "speaker_id": "SPEAKER_00",
+            "speaker_label": "Speaker 0",
+            "start_time": 258.0,
+            "end_time": 258.5,
+            "text": "Hmm"
+        },
+        {
+            "speaker_id": "SPEAKER_02",
+            "speaker_label": "Speaker 2",
+            "start_time": 259.1,
+            "end_time": 264.7,
+            "text": "Yeh sab 2 weeks mein realistically ho jayega kya?"
+        },
+        {
+            "speaker_id": "SPEAKER_00",
+            "speaker_label": "Speaker 0",
+            "start_time": 265.5,
+            "end_time": 280.2,
+            "text": "Ankit yeh valid concern hai. Agar sab kuchh squeeze karein toh quality suffer karegi. Sprint backlog se kuch items drop karne chahiye. Sara tumhara kya kehna hai?"
+        },
+        {
+            "speaker_id": "SPEAKER_03",
+            "speaker_label": "Speaker 3",
+            "start_time": 279.7,
+            "end_time": 296.1,
+            "text": "Absolutely. Rate limiter plus Redis setup plus DB blocker investigation — yeh teeno must-haves hain, baki sab next sprint. Aur logging changes — kisi ne mention nahi kiya, woh kaun karega?"
+        },
+        {
+            "speaker_id": "SPEAKER_01",
+            "speaker_label": "Speaker 1",
+            "start_time": 295.4,
+            "end_time": 295.9,
+            "text": "Hm"
+        },
+        {
+            "speaker_id": "SPEAKER_01",
+            "speaker_label": "Speaker 1",
+            "start_time": 297.0,
+            "end_time": 307.5,
+            "text": "Logging changes technically mera task tha but mere paas time nahi hai. Koi aur le sakta hai kya?"
+        },
+        {
+            "speaker_id": "SPEAKER_02",
+            "speaker_label": "Speaker 2",
+            "start_time": 308.2,
+            "end_time": 318.9,
+            "text": "Main logging dekh sakta hoon but Redis aur rollback plan bhi hai. Agar logging next sprint push ho jaaye toh better hoga."
+        },
+        {
+            "speaker_id": "SPEAKER_00",
+            "speaker_label": "Speaker 0",
+            "start_time": 319.5,
+            "end_time": 330.6,
+            "text": "Toh logging officially next sprint mein jaata hai. Koi objection? Okay decided. Ab external dependencies — payment gateway team se kab unblock honge?"
+        },
+        {
+            "speaker_id": "SPEAKER_03",
+            "speaker_label": "Speaker 3",
+            "start_time": 329.8,
+            "end_time": 330.3,
+            "text": "Okay"
+        },
+        {
+            "speaker_id": "SPEAKER_03",
+            "speaker_label": "Speaker 3",
+            "start_time": 331.5,
+            "end_time": 347.2,
+            "text": "Payment gateway team ne abhi tak contract share nahi kiya. Maine unhe 3 baar follow up kiya hai. Hamare 4 sprint tasks directly unke API spec pe depend karte hain. Agar week ke andar nahi aata toh next sprint bhi affect hoga."
+        },
+        {
+            "speaker_id": "SPEAKER_01",
+            "speaker_label": "Speaker 1",
+            "start_time": 346.6,
+            "end_time": 347.0,
+            "text": "Serious hai yeh."
+        },
+        {
+            "speaker_id": "SPEAKER_00",
+            "speaker_label": "Speaker 0",
+            "start_time": 348.0,
+            "end_time": 361.5,
+            "text": "Escalate karna padega. Sara kya tum aaj hi PM ko formally communicate kar sakti ho in writing? Main bhi CTO ko brief update dunga — cross-team blocker hai."
+        },
+        {
+            "speaker_id": "SPEAKER_03",
+            "speaker_label": "Speaker 3",
+            "start_time": 360.9,
+            "end_time": 374.3,
+            "text": "Haan main aaj shaam tak PM ko formal mail karungi with timeline impact spelled out. Sprint 4 aur 5 dono ko affect karega yeh."
+        },
+        {
+            "speaker_id": "SPEAKER_02",
+            "speaker_label": "Speaker 2",
+            "start_time": 375.0,
+            "end_time": 386.1,
+            "text": "Main CI pipeline mein rate limiter ke liye integration tests ka setup bhi kar sakta hoon Friday tak. Test likhna Priya ka kaam hoga, main sirf pipeline config karunga."
+        },
+        {
+            "speaker_id": "SPEAKER_00",
+            "speaker_label": "Speaker 0",
+            "start_time": 387.2,
+            "end_time": 401.8,
+            "text": "Perfect. Decided. Toh final summary: Priya rate limiter Thursday tak, Ankit Redis Wednesday tak rollback ke sath, Priya DB analysis Friday tak, Sara aaj PM ko mail, Ankit CI pipeline Friday tak. Koi kuchh miss hua?"
+        },
+        {
+            "speaker_id": "SPEAKER_03",
+            "speaker_label": "Speaker 3",
+            "start_time": 401.2,
+            "end_time": 401.7,
+            "text": "Nahi"
+        },
+        {
+            "speaker_id": "SPEAKER_03",
+            "speaker_label": "Speaker 3",
+            "start_time": 402.5,
+            "end_time": 413.8,
+            "text": "Ek last thing — agar payment gateway contract Friday tak nahi aaya toh Monday ko sprint planning revisit karni padegi. Yeh risk abhi bhi open hai."
+        },
+        {
+            "speaker_id": "SPEAKER_00",
+            "speaker_label": "Speaker 0",
+            "start_time": 414.5,
+            "end_time": 419.0,
+            "text": "Noted. Theek hai team, next standup kal 9:30 pe. Thanks everyone."
+        },
+        {
+            "speaker_id": "SPEAKER_01",
+            "speaker_label": "Speaker 1",
+            "start_time": 418.8,
+            "end_time": 419.5,
+            "text": "Thanks."
+        },
+        {
+            "speaker_id": "SPEAKER_02",
+            "speaker_label": "Speaker 2",
+            "start_time": 419.0,
+            "end_time": 419.6,
+            "text": "Bye."
+        }
+    ]
+}

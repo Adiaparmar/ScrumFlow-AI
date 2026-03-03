@@ -1,0 +1,41 @@
+{
+  "discourse": {
+    "topic_segments": [
+      {
+        "topic_label": "Basis of CS Research Papers",
+        "start_utterance_index": 0,
+        "end_utterance_index": 2,
+        "confidence": 0.95
+      }
+    ],
+    "questions": [
+      {
+        "utterance_index": 0,
+        "speaker_id": "SPEAKER_00",
+        "question_type": "open_ended",
+        "question_text": "Haan to bhai log main yah puchh raha tha ki ML logon se pahle jo apne software side ke bante the research papers, vah kis basis par bante the?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.98
+      }
+    ]
+  },
+  "commitments": {
+    "decisions": [],
+    "commitments": []
+  },
+  "risks": {
+    "risks": [
+      {
+        "utterance_index": 2,
+        "speaker_id": "SPEAKER_00",
+        "risk_type": "ambiguity",
+        "risk_text": "Speaker 0 states that the current work, described as 'working based' using existing models, does not qualify for research papers in CS, indicating a potential misalignment or misunderstanding of project goals or the definition of research output.",
+        "severity": "medium",
+        "mitigation_suggested": null,
+        "confidence": 0.9
+      }
+    ],
+    "overall_meeting_risk_level": "low",
+    "risk_summary": "The meeting reveals a potential ambiguity regarding the criteria for research papers, with one speaker suggesting the current 'working based' approach may not meet the standards for CS research publications. This could impact project objectives if not clarified."
+  }
+}

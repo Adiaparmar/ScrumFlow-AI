@@ -18,7 +18,7 @@ const NAV: { label: string; items: NavItem[] }[] = [
     {
         label: 'Overview',
         items: [
-            { href: '/', label: 'Dashboard', icon: LayoutDashboard },
+            { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
         ],
     },
     {
@@ -72,7 +72,7 @@ export function Sidebar() {
                     {section.items.map((item) => {
                         const Icon = item.icon;
                         const isActive = pathname === item.href ||
-                            (item.href !== '/' && pathname.startsWith(item.href));
+                            (item.href !== '/dashboard' && pathname.startsWith(item.href));
                         return (
                             <Link
                                 key={item.href}

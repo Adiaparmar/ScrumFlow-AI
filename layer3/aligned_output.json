@@ -1,0 +1,88 @@
+{
+  "conversation": [
+    {
+      "speaker_id": "SPEAKER_01",
+      "speaker_label": "Speaker 1",
+      "start_time": 0.03096875,
+      "end_time": 1.44846875,
+      "text": "Start hai."
+    },
+    {
+      "speaker_id": "SPEAKER_00",
+      "speaker_label": "Speaker 0",
+      "start_time": 3.2878437500000004,
+      "end_time": 11.084093750000001,
+      "text": "Haan to bhai log main yah puchh raha tha ki ML logon se pahle jo apne software side ke bante the research papers, vah kis basis par bante the?"
+    },
+    {
+      "speaker_id": "SPEAKER_01",
+      "speaker_label": "Speaker 1",
+      "start_time": 12.552218750000002,
+      "end_time": 34.962218750000005,
+      "text": "To CS side mein to har time se isi par van rahe hain na ki ya to ML algorithms par banenge paper ya phir koi advancement ho rahi hai jaise AI mein LLM ka advancement hua to us par paper van rahe hain. Usko integrate karke paper van rahe hain. New data ke benchmarks ko set karte hue van rahe hain. Data set banaega"
+    },
+    {
+      "speaker_id": "SPEAKER_00",
+      "speaker_label": "Speaker 0",
+      "start_time": 18.559718750000002,
+      "end_time": 18.86346875,
+      "text": "Banega."
+    },
+    {
+      "speaker_id": "SPEAKER_00",
+      "speaker_label": "Speaker 0",
+      "start_time": 22.76159375,
+      "end_time": 24.70221875,
+      "text": "Haan."
+    },
+    {
+      "speaker_id": "SPEAKER_00",
+      "speaker_label": "Speaker 0",
+      "start_time": 27.452843750000003,
+      "end_time": 28.34721875,
+      "text": "Dekhie,"
+    },
+    {
+      "speaker_id": "SPEAKER_00",
+      "speaker_label": "Speaker 0",
+      "start_time": 29.37659375,
+      "end_time": 29.79846875,
+      "text": "aap"
+    },
+    {
+      "speaker_id": "SPEAKER_00",
+      "speaker_label": "Speaker 0",
+      "start_time": 30.675968750000003,
+      "end_time": 30.97971875,
+      "text": "in"
+    },
+    {
+      "speaker_id": "SPEAKER_00",
+      "speaker_label": "Speaker 0",
+      "start_time": 34.962218750000005,
+      "end_time": 42.977843750000005,
+      "text": "tinon mein se kuchh nahin kar rahe. Aur un models ko use karke jo working based kuchh. Uske lie research paper nahin hota. Usse research paper nahin hote hain CS side mein. Ok, to vah sab kahie."
+    },
+    {
+      "speaker_id": "SPEAKER_01",
+      "speaker_label": "Speaker 1",
+      "start_time": 36.227843750000005,
+      "end_time": 38.70846875,
+      "text": ""
+    },
+    {
+      "speaker_id": "SPEAKER_01",
+      "speaker_label": "Speaker 1",
+      "start_time": 39.21471875,
+      "end_time": 39.38346875,
+      "text": ""
+    },
+    {
+      "speaker_id": "SPEAKER_01",
+      "speaker_label": "Speaker 1",
+      "start_time": 39.400343750000005,
+      "end_time": 39.65346875,
+      "text": ""
+    }
+  ]
+}

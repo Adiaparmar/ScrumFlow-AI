@@ -1,0 +1,850 @@
+{
+  "meeting_metadata": {
+    "duration_seconds": 419.2,
+    "duration_minutes": 6.99,
+    "decision_count": 5,
+    "task_creation_count": 7,
+    "decision_density": 0.715
+  },
+  "speaker_map": {
+    "SPEAKER_00": "Rahul",
+    "SPEAKER_01": "Priya",
+    "SPEAKER_02": "Ankit",
+    "SPEAKER_03": "Sara"
+  },
+  "risk_quantification": {
+    "risk_counts": {
+      "technical_blocker": 2,
+      "dependency_risk": 3,
+      "scope_creep": 1,
+      "resource_constraint": 2,
+      "timeline_pressure": 1,
+      "missing_ownership": 1
+    },
+    "total_risk_signals": 10,
+    "by_severity": {
+      "high": 4,
+      "medium": 3,
+      "low": 3
+    }
+  },
+  "tasks": [
+    {
+      "task_id": "AUTO-T-001",
+      "title": "Configure Redis Cluster mode on staging",
+      "source_type": "commitment",
+      "source_utterance_index": 8,
+      "owner_speaker_id": "SPEAKER_02",
+      "owner_name": "Ankit",
+      "deadline_text": "Wednesday",
+      "estimated_hours": 6,
+      "complexity_score": 2,
+      "skill_tags": [
+        "Redis",
+        "infrastructure",
+        "staging",
+        "DevOps"
+      ],
+      "dependency_flags": [],
+      "risk_tags": [
+        "dependency_risk"
+      ],
+      "notes": "Essential for rate limiter testing."
+    },
+    {
+      "task_id": "AUTO-T-002",
+      "title": "Prepare rollback plan for production",
+      "source_type": "commitment",
+      "source_utterance_index": 8,
+      "owner_speaker_id": "SPEAKER_02",
+      "owner_name": "Ankit",
+      "deadline_text": "Wednesday",
+      "estimated_hours": 4,
+      "complexity_score": 2,
+      "skill_tags": [
+        "documentation",
+        "rollback"
+      ],
+      "dependency_flags": [],
+      "risk_tags": [
+        "dependency_risk"
+      ],
+      "notes": "Mitigation for Redis configuration changes."
+    },
+    {
+      "task_id": "AUTO-T-003",
+      "title": "Implement token bucket rate limiter with configurable per-client limits and X-RateLimit response headers on Nginx edge layer",
+      "source_type": "commitment",
+      "source_utterance_index": 13,
+      "owner_speaker_id": "SPEAKER_01",
+      "owner_name": "Priya",
+      "deadline_text": "Thursday",
+      "estimated_hours": 16,
+      "complexity_score": 4,
+      "skill_tags": [
+        "rate-limiting",
+        "API",
+        "backend",
+        "Nginx",
+        "system-design"
+      ],
+      "dependency_flags": [
+        "Redis Cluster mode must be configured on staging for testing"
+      ],
+      "risk_tags": [
+        "technical_blocker",
+        "dependency_risk"
+      ],
+      "notes": "Implements decision from utterance 12. Requires AUTO-T-001 for testing."
+    },
+    {
+      "task_id": "AUTO-T-004",
+      "title": "Analyze and prepare fix proposal for DB migration foreign key constraint issue, including data migration dry run on staging",
+      "source_type": "commitment",
+      "source_utterance_index": 20,
+      "owner_speaker_id": "SPEAKER_01",
+      "owner_name": "Priya",
+      "deadline_text": "Friday",
+      "estimated_hours": 10,
+      "complexity_score": 3,
+      "skill_tags": [
+        "database-migration",
+        "schema-design",
+        "SQL",
+        "backend",
+        "testing"
+      ],
+      "dependency_flags": [],
+      "risk_tags": [
+        "technical_blocker"
+      ],
+      "notes": "Addresses blocker for DB migration Phase 2 (Decision 19)."
+    },
+    {
+      "task_id": "AUTO-T-005",
+      "title": "Send formal email to PM detailing timeline impact of payment gateway blocker",
+      "source_type": "commitment",
+      "source_utterance_index": 31,
+      "owner_speaker_id": "SPEAKER_03",
+      "owner_name": "Sara",
+      "deadline_text": "this evening",
+      "estimated_hours": 1,
+      "complexity_score": 2,
+      "skill_tags": [
+        "documentation"
+      ],
+      "dependency_flags": [],
+      "risk_tags": [
+        "dependency_risk"
+      ],
+      "notes": "Part of mitigation for payment gateway API contract delay."
+    },
+    {
+      "task_id": "AUTO-T-006",
+      "title": "Give brief update to CTO about cross-team payment gateway blocker",
+      "source_type": "commitment",
+      "source_utterance_index": 30,
+      "owner_speaker_id": "SPEAKER_00",
+      "owner_name": "Rahul",
+      "deadline_text": null,
+      "estimated_hours": 1,
+      "complexity_score": 2,
+      "skill_tags": [],
+      "dependency_flags": [],
+      "risk_tags": [
+        "dependency_risk"
+      ],
+      "notes": "Part of mitigation for payment gateway API contract delay."
+    },
+    {
+      "task_id": "AUTO-T-007",
+      "title": "Set up CI pipeline for rate limiter integration tests",
+      "source_type": "commitment",
+      "source_utterance_index": 32,
+      "owner_speaker_id": "SPEAKER_02",
+      "owner_name": "Ankit",
+      "deadline_text": "Friday",
+      "estimated_hours": 6,
+      "complexity_score": 3,
+      "skill_tags": [
+        "CI-CD",
+        "testing",
+        "integration-tests",
+        "DevOps"
+      ],
+      "dependency_flags": [
+        "Rate limiter implementation must be complete"
+      ],
+      "risk_tags": [
+        "timeline_pressure"
+      ],
+      "notes": "Depends on AUTO-T-003 completion."
+    }
+  ],
+  "dependency_edges": [
+    {
+      "from_task_id": "AUTO-T-001",
+      "to_task_id": "AUTO-T-003",
+      "reason": "Redis Cluster mode on staging must be configured for rate limiter testing."
+    },
+    {
+      "from_task_id": "AUTO-T-003",
+      "to_task_id": "AUTO-T-007",
+      "reason": "Rate limiter implementation must be complete before integration tests can be set up."
+    }
+  ],
+  "allocation_suggestions": [
+    {
+      "task_id": "AUTO-T-001",
+      "task_title": "Configure Redis Cluster mode on staging",
+      "source_meeting_commitment": "Essential for rate limiter testing.",
+      "owner_suggested_by_transcript": "Ankit",
+      "deadline_text": "Wednesday",
+      "suggested_assignee_id": "E-03",
+      "suggested_assignee_name": "Ankit Verma",
+      "suggested_assignee_role": "DevOps Engineer",
+      "skill_match_percentage": 100.0,
+      "load_fit_percentage": 5.0,
+      "confidence_score": 68.3,
+      "reasoning": [
+        "Skill match: 100% (4/4 required skills: Redis, infrastructure, staging)",
+        "Workload: 32h/week current load + 6h task = 38h vs 40h capacity (5% fit)",
+        "Historical completion rate: 84% across DevOps Engineer task types",
+        "Highest combined score among available team members"
+      ],
+      "alternative_suggestions": [
+        {
+          "employee_id": "E-11",
+          "employee_name": "Karan Malhotra",
+          "role": "DevOps Engineer",
+          "skill_match": 75.0,
+          "load_fit": 20.0,
+          "confidence": 61.1
+        },
+        {
+          "employee_id": "E-04",
+          "employee_name": "Sara Iyer",
+          "role": "Systems Architect",
+          "skill_match": 25.0,
+          "load_fit": 45.0,
+          "confidence": 44.8
+        }
+      ]
+    },
+    {
+      "task_id": "AUTO-T-002",
+      "task_title": "Prepare rollback plan for production",
+      "source_meeting_commitment": "Mitigation for Redis configuration changes.",
+      "owner_suggested_by_transcript": "Ankit",
+      "deadline_text": "Wednesday",
+      "suggested_assignee_id": "E-08",
+      "suggested_assignee_name": "Deepika Singh",
+      "suggested_assignee_role": "QA Engineer",
+      "skill_match_percentage": 50.0,
+      "load_fit_percentage": 40.0,
+      "confidence_score": 55.6,
+      "reasoning": [
+        "Skill match: 50% (1/2 required skills: documentation)",
+        "Workload: 20h/week current load + 4h task = 24h vs 40h capacity (40% fit)",
+        "Historical completion rate: 93% across QA Engineer task types",
+        "Highest combined score among available team members"
+      ],
+      "alternative_suggestions": [
+        {
+          "employee_id": "E-03",
+          "employee_name": "Ankit Verma",
+          "role": "DevOps Engineer",
+          "skill_match": 50.0,
+          "load_fit": 10.0,
+          "confidence": 44.8
+        },
+        {
+          "employee_id": "E-12",
+          "employee_name": "Aditya Patel",
+          "role": "Backend Engineer",
+          "skill_match": 0.0,
+          "load_fit": 60.0,
+          "confidence": 34.6
+        }
+      ]
+    },
+    {
+      "task_id": "AUTO-T-003",
+      "task_title": "Implement token bucket rate limiter with configurable per-client limits and X-RateLimit response headers on Nginx edge layer",
+      "source_meeting_commitment": "Implements decision from utterance 12. Requires AUTO-T-001 for testing.",
+      "owner_suggested_by_transcript": "Priya",
+      "deadline_text": "Thursday",
+      "suggested_assignee_id": "E-04",
+      "suggested_assignee_name": "Sara Iyer",
+      "suggested_assignee_role": "Systems Architect",
+      "skill_match_percentage": 100.0,
+      "load_fit_percentage": 20.0,
+      "confidence_score": 74.8,
+      "reasoning": [
+        "Skill match: 100% (5/5 required skills: rate-limiting, API, backend)",
+        "Workload: 16h/week current load + 16h task = 32h vs 40h capacity (20% fit)",
+        "Historical completion rate: 94% across Systems Architect task types",
+        "Highest combined score among available team members"
+      ],
+      "alternative_suggestions": [
+        {
+          "employee_id": "E-01",
+          "employee_name": "Rahul Mehta",
+          "role": "Tech Lead",
+          "skill_match": 80.0,
+          "load_fit": 0.0,
+          "confidence": 58.2
+        },
+        {
+          "employee_id": "E-02",
+          "employee_name": "Priya Sharma",
+          "role": "Backend Engineer",
+          "skill_match": 80.0,
+          "load_fit": 0.0,
+          "confidence": 57.4
+        }
+      ]
+    },
+    {
+      "task_id": "AUTO-T-004",
+      "task_title": "Analyze and prepare fix proposal for DB migration foreign key constraint issue, including data migration dry run on staging",
+      "source_meeting_commitment": "Addresses blocker for DB migration Phase 2 (Decision 19).",
+      "owner_suggested_by_transcript": "Priya",
+      "deadline_text": "Friday",
+      "suggested_assignee_id": "E-12",
+      "suggested_assignee_name": "Aditya Patel",
+      "suggested_assignee_role": "Backend Engineer",
+      "skill_match_percentage": 60.0,
+      "load_fit_percentage": 45.0,
+      "confidence_score": 60.1,
+      "reasoning": [
+        "Skill match: 60% (3/5 required skills: database-migration, SQL, backend)",
+        "Workload: 12h/week current load + 10h task = 22h vs 40h capacity (45% fit)",
+        "Historical completion rate: 83% across Backend Engineer task types",
+        "Highest combined score among available team members"
+      ],
+      "alternative_suggestions": [
+        {
+          "employee_id": "E-09",
+          "employee_name": "Mohit Gupta",
+          "role": "Data Engineer",
+          "skill_match": 60.0,
+          "load_fit": 30.0,
+          "confidence": 56.0
+        },
+        {
+          "employee_id": "E-04",
+          "employee_name": "Sara Iyer",
+          "role": "Systems Architect",
+          "skill_match": 40.0,
+          "load_fit": 35.0,
+          "confidence": 49.3
+        }
+      ]
+    },
+    {
+      "task_id": "AUTO-T-005",
+      "task_title": "Send formal email to PM detailing timeline impact of payment gateway blocker",
+      "source_meeting_commitment": "Part of mitigation for payment gateway API contract delay.",
+      "owner_suggested_by_transcript": "Sara",
+      "deadline_text": "this evening",
+      "suggested_assignee_id": "E-08",
+      "suggested_assignee_name": "Deepika Singh",
+      "suggested_assignee_role": "QA Engineer",
+      "skill_match_percentage": 100.0,
+      "load_fit_percentage": 47.5,
+      "confidence_score": 82.8,
+      "reasoning": [
+        "Skill match: 100% (1/1 required skills: documentation)",
+        "Workload: 20h/week current load + 1h task = 21h vs 40h capacity (48% fit)",
+        "Historical completion rate: 93% across QA Engineer task types",
+        "Highest combined score among available team members"
+      ],
+      "alternative_suggestions": [
+        {
+          "employee_id": "E-12",
+          "employee_name": "Aditya Patel",
+          "role": "Backend Engineer",
+          "skill_match": 0.0,
+          "load_fit": 67.5,
+          "confidence": 36.9
+        },
+        {
+          "employee_id": "E-04",
+          "employee_name": "Sara Iyer",
+          "role": "Systems Architect",
+          "skill_match": 0.0,
+          "load_fit": 57.5,
+          "confidence": 36.0
+        }
+      ]
+    },
+    {
+      "task_id": "AUTO-T-006",
+      "task_title": "Give brief update to CTO about cross-team payment gateway blocker",
+      "source_meeting_commitment": "Part of mitigation for payment gateway API contract delay.",
+      "owner_suggested_by_transcript": "Rahul",
+      "deadline_text": null,
+      "suggested_assignee_id": "E-12",
+      "suggested_assignee_name": "Aditya Patel",
+      "suggested_assignee_role": "Backend Engineer",
+      "skill_match_percentage": 0.0,
+      "load_fit_percentage": 67.5,
+      "confidence_score": 36.9,
+      "reasoning": [
+        "Skill match: 0% (0/0 required skills: none)",
+        "Workload: 12h/week current load + 1h task = 13h vs 40h capacity (68% fit)",
+        "Historical completion rate: 83% across Backend Engineer task types",
+        "Highest combined score among available team members"
+      ],
+      "alternative_suggestions": [
+        {
+          "employee_id": "E-04",
+          "employee_name": "Sara Iyer",
+          "role": "Systems Architect",
+          "skill_match": 0.0,
+          "load_fit": 57.5,
+          "confidence": 36.0
+        },
+        {
+          "employee_id": "E-08",
+          "employee_name": "Deepika Singh",
+          "role": "QA Engineer",
+          "skill_match": 0.0,
+          "load_fit": 47.5,
+          "confidence": 32.9
+        }
+      ]
+    },
+    {
+      "task_id": "AUTO-T-007",
+      "task_title": "Set up CI pipeline for rate limiter integration tests",
+      "source_meeting_commitment": "Depends on AUTO-T-003 completion.",
+      "owner_suggested_by_transcript": "Ankit",
+      "deadline_text": "Friday",
+      "suggested_assignee_id": "E-08",
+      "suggested_assignee_name": "Deepika Singh",
+      "suggested_assignee_role": "QA Engineer",
+      "skill_match_percentage": 75.0,
+      "load_fit_percentage": 35.0,
+      "confidence_score": 66.6,
+      "reasoning": [
+        "Skill match: 75% (3/4 required skills: CI-CD, testing, integration-tests)",
+        "Workload: 20h/week current load + 6h task = 26h vs 40h capacity (35% fit)",
+        "Historical completion rate: 93% across QA Engineer task types",
+        "Highest combined score among available team members"
+      ],
+      "alternative_suggestions": [
+        {
+          "employee_id": "E-11",
+          "employee_name": "Karan Malhotra",
+          "role": "DevOps Engineer",
+          "skill_match": 75.0,
+          "load_fit": 20.0,
+          "confidence": 61.1
+        },
+        {
+          "employee_id": "E-03",
+          "employee_name": "Ankit Verma",
+          "role": "DevOps Engineer",
+          "skill_match": 50.0,
+          "load_fit": 5.0,
+          "confidence": 43.3
+        }
+      ]
+    }
+  ],
+  "layer3_raw": {
+    "discourse": {
+      "topic_segments": [
+        {
+          "topic_label": "Meeting Introductions",
+          "start_utterance_index": 0,
+          "end_utterance_index": 3,
+          "confidence": 0.95
+        },
+        {
+          "topic_label": "Sprint Velocity and Redis Blocker",
+          "start_utterance_index": 4,
+          "end_utterance_index": 8,
+          "confidence": 0.95
+        },
+        {
+          "topic_label": "Rate Limiting Decision and Implementation",
+          "start_utterance_index": 9,
+          "end_utterance_index": 13,
+          "confidence": 0.95
+        },
+        {
+          "topic_label": "Distributed Tracing Scope",
+          "start_utterance_index": 14,
+          "end_utterance_index": 16,
+          "confidence": 0.95
+        },
+        {
+          "topic_label": "Database Migration Blocker",
+          "start_utterance_index": 17,
+          "end_utterance_index": 20,
+          "confidence": 0.95
+        },
+        {
+          "topic_label": "Sprint Scope and Logging",
+          "start_utterance_index": 21,
+          "end_utterance_index": 27,
+          "confidence": 0.95
+        },
+        {
+          "topic_label": "External Dependency (Payment Gateway)",
+          "start_utterance_index": 28,
+          "end_utterance_index": 31,
+          "confidence": 0.95
+        },
+        {
+          "topic_label": "Action Items and Meeting Wrap-up",
+          "start_utterance_index": 32,
+          "end_utterance_index": 35,
+          "confidence": 0.95
+        }
+      ],
+      "questions": [
+        {
+          "utterance_index": 4,
+          "speaker_id": "SPEAKER_00",
+          "question_type": "open_ended",
+          "question_text": "Velocity thodi kam rahi — iska kya karan hai?",
+          "is_answered_in_transcript": true,
+          "confidence": 0.95
+        },
+        {
+          "utterance_index": 7,
+          "speaker_id": "SPEAKER_00",
+          "question_type": "clarification",
+          "question_text": "Ankit, Redis cluster ka staging setup ab kab tak ho jayega?",
+          "is_answered_in_transcript": true,
+          "confidence": 0.95
+        },
+        {
+          "utterance_index": 7,
+          "speaker_id": "SPEAKER_00",
+          "question_type": "clarification",
+          "question_text": "Aur kya iska production timeline pe impact padega?",
+          "is_answered_in_transcript": true,
+          "confidence": 0.95
+        },
+        {
+          "utterance_index": 9,
+          "speaker_id": "SPEAKER_01",
+          "question_type": "decision_seeking",
+          "question_text": "Toh ab rate limiting ke baare mein final decision lete hain — token bucket ya leaky bucket?",
+          "is_answered_in_transcript": true,
+          "confidence": 0.95
+        },
+        {
+          "utterance_index": 11,
+          "speaker_id": "SPEAKER_03",
+          "question_type": "confirmation",
+          "question_text": "Kya team iss par agree hai?",
+          "is_answered_in_transcript": true,
+          "confidence": 0.95
+        },
+        {
+          "utterance_index": 14,
+          "speaker_id": "SPEAKER_02",
+          "question_type": "decision_seeking",
+          "question_text": "kya hum distributed tracing bhi add kar sakte hain iss sprint mein?",
+          "is_answered_in_transcript": true,
+          "confidence": 0.95
+        },
+        {
+          "utterance_index": 19,
+          "speaker_id": "SPEAKER_00",
+          "question_type": "decision_seeking",
+          "question_text": "Priya, kya tum foreign key constraint issue investigate karke ek fix proposal taiyar kar sakti ho Friday tak?",
+          "is_answered_in_transcript": true,
+          "confidence": 0.95
+        },
+        {
+          "utterance_index": 22,
+          "speaker_id": "SPEAKER_02",
+          "question_type": "open_ended",
+          "question_text": "Yeh sab 2 weeks mein realistically ho jayega kya?",
+          "is_answered_in_transcript": true,
+          "confidence": 0.95
+        },
+        {
+          "utterance_index": 23,
+          "speaker_id": "SPEAKER_00",
+          "question_type": "open_ended",
+          "question_text": "Sara tumhara kya kehna hai?",
+          "is_answered_in_transcript": true,
+          "confidence": 0.95
+        },
+        {
+          "utterance_index": 24,
+          "speaker_id": "SPEAKER_03",
+          "question_type": "open_ended",
+          "question_text": "Aur logging changes — kisi ne mention nahi kiya, woh kaun karega?",
+          "is_answered_in_transcript": true,
+          "confidence": 0.95
+        },
+        {
+          "utterance_index": 25,
+          "speaker_id": "SPEAKER_01",
+          "question_type": "open_ended",
+          "question_text": "Koi aur le sakta hai kya?",
+          "is_answered_in_transcript": true,
+          "confidence": 0.95
+        },
+        {
+          "utterance_index": 27,
+          "speaker_id": "SPEAKER_00",
+          "question_type": "confirmation",
+          "question_text": "Koi objection?",
+          "is_answered_in_transcript": true,
+          "confidence": 0.95
+        },
+        {
+          "utterance_index": 27,
+          "speaker_id": "SPEAKER_00",
+          "question_type": "open_ended",
+          "question_text": "Ab external dependencies — payment gateway team se kab unblock honge?",
+          "is_answered_in_transcript": true,
+          "confidence": 0.95
+        },
+        {
+          "utterance_index": 30,
+          "speaker_id": "SPEAKER_00",
+          "question_type": "decision_seeking",
+          "question_text": "Sara kya tum aaj hi PM ko formally communicate kar sakti ho in writing?",
+          "is_answered_in_transcript": true,
+          "confidence": 0.95
+        },
+        {
+          "utterance_index": 33,
+          "speaker_id": "SPEAKER_00",
+          "question_type": "confirmation",
+          "question_text": "Koi kuchh miss hua?",
+          "is_answered_in_transcript": true,
+          "confidence": 0.95
+        }
+      ]
+    },
+    "commitments": {
+      "decisions": [
+        {
+          "utterance_index": 12,
+          "speaker_id": "SPEAKER_00",
+          "decision_text": "Implement token bucket rate limiting on the Nginx edge layer with a configurable burst window of 10 seconds.",
+          "decision_type": "technical",
+          "agreed_by": [
+            "SPEAKER_01",
+            "SPEAKER_03",
+            "SPEAKER_00"
+          ],
+          "confidence": 0.98
+        },
+        {
+          "utterance_index": 16,
+          "speaker_id": "SPEAKER_00",
+          "decision_text": "Postpone distributed tracing implementation to the next sprint.",
+          "decision_type": "scope",
+          "agreed_by": [
+            "SPEAKER_03",
+            "SPEAKER_00"
+          ],
+          "confidence": 0.95
+        },
+        {
+          "utterance_index": 19,
+          "speaker_id": "SPEAKER_00",
+          "decision_text": "Postpone DB migration Phase 2 to the next sprint due to a critical foreign key constraint blocker and data corruption risk.",
+          "decision_type": "timeline",
+          "agreed_by": [
+            "SPEAKER_01",
+            "SPEAKER_03",
+            "SPEAKER_00"
+          ],
+          "confidence": 0.96
+        },
+        {
+          "utterance_index": 24,
+          "speaker_id": "SPEAKER_03",
+          "decision_text": "Prioritize rate limiter implementation, Redis setup, and DB blocker investigation as must-haves for the current sprint, deferring other items.",
+          "decision_type": "prioritization",
+          "agreed_by": [
+            "SPEAKER_02",
+            "SPEAKER_03",
+            "SPEAKER_00"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "utterance_index": 27,
+          "speaker_id": "SPEAKER_00",
+          "decision_text": "Postpone logging changes to the next sprint.",
+          "decision_type": "scope",
+          "agreed_by": [
+            "SPEAKER_01",
+            "SPEAKER_02",
+            "SPEAKER_00"
+          ],
+          "confidence": 0.97
+        }
+      ],
+      "commitments": [
+        {
+          "utterance_index": 8,
+          "speaker_id": "SPEAKER_02",
+          "commitment_text": "Ankit will configure Redis Cluster mode on staging by Wednesday.",
+          "owner": "SPEAKER_02",
+          "deadline_mentioned": "Wednesday",
+          "confidence": 0.98
+        },
+        {
+          "utterance_index": 8,
+          "speaker_id": "SPEAKER_02",
+          "commitment_text": "Ankit will prepare a rollback plan for production by Wednesday.",
+          "owner": "SPEAKER_02",
+          "deadline_mentioned": "Wednesday",
+          "confidence": 0.97
+        },
+        {
+          "utterance_index": 13,
+          "speaker_id": "SPEAKER_01",
+          "commitment_text": "Priya will implement the token bucket rate limiter with configurable per-client limits and add X-RateLimit response headers (X-RateLimit-Limit, X-RateLimit-Remaining) by Thursday.",
+          "owner": "SPEAKER_01",
+          "deadline_mentioned": "Thursday",
+          "confidence": 0.98
+        },
+        {
+          "utterance_index": 20,
+          "speaker_id": "SPEAKER_01",
+          "commitment_text": "Priya will conduct a detailed analysis and prepare a fix proposal for the DB migration foreign key constraint issue by Friday, including a data migration dry run on staging.",
+          "owner": "SPEAKER_01",
+          "deadline_mentioned": "Friday",
+          "confidence": 0.97
+        },
+        {
+          "utterance_index": 31,
+          "speaker_id": "SPEAKER_03",
+          "commitment_text": "Sara will send a formal email to the PM by this evening, detailing the timeline impact of the payment gateway blocker.",
+          "owner": "SPEAKER_03",
+          "deadline_mentioned": "this evening",
+          "confidence": 0.96
+        },
+        {
+          "utterance_index": 30,
+          "speaker_id": "SPEAKER_00",
+          "commitment_text": "Rahul will give a brief update to the CTO about the cross-team payment gateway blocker.",
+          "owner": "SPEAKER_00",
+          "deadline_mentioned": null,
+          "confidence": 0.85
+        },
+        {
+          "utterance_index": 32,
+          "speaker_id": "SPEAKER_02",
+          "commitment_text": "Ankit will set up the CI pipeline for rate limiter integration tests by Friday.",
+          "owner": "SPEAKER_02",
+          "deadline_mentioned": "Friday",
+          "confidence": 0.95
+        }
+      ]
+    },
+    "risks": {
+      "risks": [
+        {
+          "utterance_index": 5,
+          "speaker_id": "SPEAKER_01",
+          "risk_type": "technical_blocker",
+          "risk_text": "API Gateway redesign took longer than expected due to unanticipated edge cases in token bucket implementation, impacting previous sprint velocity.",
+          "severity": "medium",
+          "mitigation_suggested": null,
+          "confidence": 0.9
+        },
+        {
+          "utterance_index": 6,
+          "speaker_id": "SPEAKER_02",
+          "risk_type": "dependency_risk",
+          "risk_text": "Infra team's incomplete Redis cluster configuration on staging blocked Priya's testing for almost 3 days.",
+          "severity": "high",
+          "mitigation_suggested": "Ankit committed to configuring Redis cluster mode on staging by Wednesday and preparing a rollback plan.",
+          "confidence": 0.95
+        },
+        {
+          "utterance_index": 14,
+          "speaker_id": "SPEAKER_02",
+          "risk_type": "scope_creep",
+          "risk_text": "Suggestion to add distributed tracing (OpenTelemetry integration) to the current sprint, which is currently in the backlog.",
+          "severity": "low",
+          "mitigation_suggested": "Rejected by Sara and Rahul, pushed to next sprint.",
+          "confidence": 0.85
+        },
+        {
+          "utterance_index": 17,
+          "speaker_id": "SPEAKER_01",
+          "risk_type": "technical_blocker",
+          "risk_text": "Critical blocker in DB migration Phase 2 due to an existing foreign key constraint not handled by the script, risking production data corruption.",
+          "severity": "high",
+          "mitigation_suggested": "Phase 2 pushed to next sprint; Priya to investigate and prepare a fix proposal by Friday.",
+          "confidence": 0.98
+        },
+        {
+          "utterance_index": 21,
+          "speaker_id": "SPEAKER_02",
+          "risk_type": "resource_constraint",
+          "risk_text": "Team is stretched with too much work in the current sprint, with multiple critical tasks assigned to few individuals.",
+          "severity": "medium",
+          "mitigation_suggested": "Rahul suggested dropping items from the sprint backlog; Sara confirmed only must-haves for this sprint.",
+          "confidence": 0.92
+        },
+        {
+          "utterance_index": 22,
+          "speaker_id": "SPEAKER_02",
+          "risk_type": "timeline_pressure",
+          "risk_text": "Ankit questions if all current tasks can realistically be completed within the remaining 2 weeks of the sprint.",
+          "severity": "medium",
+          "mitigation_suggested": "Rahul suggested dropping items from the sprint backlog.",
+          "confidence": 0.9
+        },
+        {
+          "utterance_index": 24,
+          "speaker_id": "SPEAKER_03",
+          "risk_type": "missing_ownership",
+          "risk_text": "Logging changes task has no clear owner, and no one has mentioned it.",
+          "severity": "low",
+          "mitigation_suggested": "Pushed to next sprint due to resource constraints.",
+          "confidence": 0.88
+        },
+        {
+          "utterance_index": 25,
+          "speaker_id": "SPEAKER_01",
+          "risk_type": "resource_constraint",
+          "risk_text": "Priya, the technical owner for logging changes, does not have time to complete the task in the current sprint.",
+          "severity": "low",
+          "mitigation_suggested": "Task pushed to next sprint.",
+          "confidence": 0.85
+        },
+        {
+          "utterance_index": 28,
+          "speaker_id": "SPEAKER_03",
+          "risk_type": "dependency_risk",
+          "risk_text": "Payment gateway team has not shared the API contract despite 3 follow-ups, blocking 4 sprint tasks and potentially affecting the next sprint.",
+          "severity": "high",
+          "mitigation_suggested": "Sara to formally communicate to PM in writing today; Rahul to give CTO an update.",
+          "confidence": 0.97
+        },
+        {
+          "utterance_index": 34,
+          "speaker_id": "SPEAKER_03",
+          "risk_type": "dependency_risk",
+          "risk_text": "The payment gateway contract risk is still open; if not received by Friday, sprint planning will need to be revisited.",
+          "severity": "high",
+          "mitigation_suggested": "Revisit sprint planning on Monday if the contract is not received by Friday.",
+          "confidence": 0.95
+        }
+      ],
+      "overall_meeting_risk_level": "high",
+      "risk_summary": "The meeting identified several critical issues impacting current and future sprints. A significant technical blocker in DB migration Phase 2 (data corruption risk) necessitates pushing it to the next sprint. An external dependency on the payment gateway team for API contracts is blocking four sprint tasks and threatens to impact subsequent sprints, requiring immediate escalation. Internally, the team is experiencing resource constraints and timeline pressure, leading to a need to descope the current sprint. While mitigations are being put in place for individual risks, the cumulative effect indicates a high overall risk to project delivery."
+    }
+  }
+}

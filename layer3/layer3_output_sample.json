@@ -1,0 +1,445 @@
+{
+  "discourse": {
+    "topic_segments": [
+      {
+        "topic_label": "Sprint Review, Velocity, Redis Blocker",
+        "start_utterance_index": 0,
+        "end_utterance_index": 4,
+        "confidence": 0.95
+      },
+      {
+        "topic_label": "Rate Limiting Algorithm Decision",
+        "start_utterance_index": 5,
+        "end_utterance_index": 8,
+        "confidence": 0.93
+      },
+      {
+        "topic_label": "Distributed Tracing Scope Discussion",
+        "start_utterance_index": 9,
+        "end_utterance_index": 10,
+        "confidence": 0.9
+      },
+      {
+        "topic_label": "Database Migration Blocker",
+        "start_utterance_index": 11,
+        "end_utterance_index": 15,
+        "confidence": 0.94
+      },
+      {
+        "topic_label": "Sprint Workload and Prioritization",
+        "start_utterance_index": 16,
+        "end_utterance_index": 20,
+        "confidence": 0.92
+      },
+      {
+        "topic_label": "Logging and External Dependencies",
+        "start_utterance_index": 21,
+        "end_utterance_index": 24,
+        "confidence": 0.91
+      },
+      {
+        "topic_label": "Sprint Commitments and Wrap-up",
+        "start_utterance_index": 25,
+        "end_utterance_index": 29,
+        "confidence": 0.96
+      }
+    ],
+    "questions": [
+      {
+        "utterance_index": 0,
+        "speaker_id": "SPEAKER_00",
+        "question_type": "open_ended",
+        "question_text": "iska kya karan hai?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.95
+      },
+      {
+        "utterance_index": 3,
+        "speaker_id": "SPEAKER_00",
+        "question_type": "decision_seeking",
+        "question_text": "Ankit, Redis cluster ka staging setup ab kab tak ho jayega?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.94
+      },
+      {
+        "utterance_index": 3,
+        "speaker_id": "SPEAKER_00",
+        "question_type": "clarification",
+        "question_text": "Aur kya iska production timeline pe koi impact padega?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.92
+      },
+      {
+        "utterance_index": 5,
+        "speaker_id": "SPEAKER_01",
+        "question_type": "decision_seeking",
+        "question_text": "token bucket ya leaky bucket?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.95
+      },
+      {
+        "utterance_index": 6,
+        "speaker_id": "SPEAKER_03",
+        "question_type": "confirmation",
+        "question_text": "Kya team iss par agree hai?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.93
+      },
+      {
+        "utterance_index": 9,
+        "speaker_id": "SPEAKER_02",
+        "question_type": "decision_seeking",
+        "question_text": "kya hum distributed tracing bhi add kar sakte hain iss sprint mein?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.91
+      },
+      {
+        "utterance_index": 13,
+        "speaker_id": "SPEAKER_03",
+        "question_type": "clarification",
+        "question_text": "Is decision se kya downstream tasks block honge?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.9
+      },
+      {
+        "utterance_index": 14,
+        "speaker_id": "SPEAKER_00",
+        "question_type": "decision_seeking",
+        "question_text": "Priya, kya tum foreign key constraint issue ko investigate karke ek fix proposal taiyar kar sakti ho Friday tak?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.94
+      },
+      {
+        "utterance_index": 16,
+        "speaker_id": "SPEAKER_02",
+        "question_type": "open_ended",
+        "question_text": "Yeh sab 2 weeks mein ho jayega?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.92
+      },
+      {
+        "utterance_index": 17,
+        "speaker_id": "SPEAKER_00",
+        "question_type": "open_ended",
+        "question_text": "Sara, tumhara kya kehna hai priority ke baare mein?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.93
+      },
+      {
+        "utterance_index": 18,
+        "speaker_id": "SPEAKER_03",
+        "question_type": "open_ended",
+        "question_text": "Woh kaun karega iss sprint mein?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.9
+      },
+      {
+        "utterance_index": 19,
+        "speaker_id": "SPEAKER_01",
+        "question_type": "decision_seeking",
+        "question_text": "Koi doosra le sakta hai kya?",
+        "is_answered_in_transcript": false,
+        "confidence": 0.91
+      },
+      {
+        "utterance_index": 21,
+        "speaker_id": "SPEAKER_00",
+        "question_type": "confirmation",
+        "question_text": "Koi objection?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.95
+      },
+      {
+        "utterance_index": 21,
+        "speaker_id": "SPEAKER_00",
+        "question_type": "open_ended",
+        "question_text": "payment gateway team se hum kab se unblock honge?",
+        "is_answered_in_transcript": false,
+        "confidence": 0.92
+      },
+      {
+        "utterance_index": 23,
+        "speaker_id": "SPEAKER_00",
+        "question_type": "decision_seeking",
+        "question_text": "Sara, kya tum aaj hi product manager Ko yeh dependency formally communicate kar sakti ho in writing?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.94
+      },
+      {
+        "utterance_index": 25,
+        "speaker_id": "SPEAKER_00",
+        "question_type": "open_ended",
+        "question_text": "Kya koi kuchh miss hua hai?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.93
+      },
+      {
+        "utterance_index": 26,
+        "speaker_id": "SPEAKER_01",
+        "question_type": "decision_seeking",
+        "question_text": "kya hum yeh bhi decide karein ki CI pipeline mein rate limiter ke liye integration tests kaun likhega?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.94
+      },
+      {
+        "utterance_index": 26,
+        "speaker_id": "SPEAKER_01",
+        "question_type": "decision_seeking",
+        "question_text": "Woh bhi Thursday ke deliverable mein include karein ya alag se?",
+        "is_answered_in_transcript": true,
+        "confidence": 0.92
+      },
+      {
+        "utterance_index": 28,
+        "speaker_id": "SPEAKER_00",
+        "question_type": "open_ended",
+        "question_text": "Koi aur questions hain?",
+        "is_answered_in_transcript": false,
+        "confidence": 0.95
+      }
+    ]
+  },
+  "commitments": {
+    "decisions": [
+      {
+        "utterance_index": 7,
+        "speaker_id": "SPEAKER_00",
+        "decision_text": "Implement token bucket rate limiting on the Nginx edge layer with a configurable burst window of 10 seconds.",
+        "decision_type": "technical",
+        "agreed_by": [
+          "SPEAKER_00",
+          "SPEAKER_01",
+          "SPEAKER_03"
+        ],
+        "confidence": 0.98
+      },
+      {
+        "utterance_index": 11,
+        "speaker_id": "SPEAKER_00",
+        "decision_text": "Defer distributed tracing integration to the next sprint.",
+        "decision_type": "scope",
+        "agreed_by": [
+          "SPEAKER_00",
+          "SPEAKER_03"
+        ],
+        "confidence": 0.95
+      },
+      {
+        "utterance_index": 14,
+        "speaker_id": "SPEAKER_00",
+        "decision_text": "Push Database Migration Phase 2 to the next sprint due to a critical foreign key constraint blocker.",
+        "decision_type": "timeline",
+        "agreed_by": [
+          "SPEAKER_00",
+          "SPEAKER_03"
+        ],
+        "confidence": 0.96
+      },
+      {
+        "utterance_index": 21,
+        "speaker_id": "SPEAKER_00",
+        "decision_text": "Defer logging and observability changes to the next sprint.",
+        "decision_type": "scope",
+        "agreed_by": [
+          "SPEAKER_00",
+          "SPEAKER_01",
+          "SPEAKER_02"
+        ],
+        "confidence": 0.97
+      },
+      {
+        "utterance_index": 28,
+        "speaker_id": "SPEAKER_00",
+        "decision_text": "Integration tests for the rate limiter will be written by Priya and wired into the CI pipeline by Ankit.",
+        "decision_type": "process",
+        "agreed_by": [
+          "SPEAKER_00",
+          "SPEAKER_01",
+          "SPEAKER_02"
+        ],
+        "confidence": 0.95
+      }
+    ],
+    "commitments": [
+      {
+        "utterance_index": 4,
+        "speaker_id": "SPEAKER_02",
+        "commitment_text": "SPEAKER_02 will configure Redis Cluster mode on staging by Wednesday.",
+        "owner": "SPEAKER_02",
+        "deadline_mentioned": "Wednesday",
+        "confidence": 0.98
+      },
+      {
+        "utterance_index": 4,
+        "speaker_id": "SPEAKER_02",
+        "commitment_text": "SPEAKER_02 will prepare a rollback plan document for production by Wednesday.",
+        "owner": "SPEAKER_02",
+        "deadline_mentioned": "Wednesday",
+        "confidence": 0.97
+      },
+      {
+        "utterance_index": 8,
+        "speaker_id": "SPEAKER_01",
+        "commitment_text": "SPEAKER_01 will implement the rate limiter with configurable per-client limits and add X-RateLimit response headers by Thursday.",
+        "owner": "SPEAKER_01",
+        "deadline_mentioned": "Thursday",
+        "confidence": 0.98
+      },
+      {
+        "utterance_index": 15,
+        "speaker_id": "SPEAKER_01",
+        "commitment_text": "SPEAKER_01 will prepare a detailed analysis and fix proposal for the foreign key constraint issue, including a data migration dry run on staging, by Friday.",
+        "owner": "SPEAKER_01",
+        "deadline_mentioned": "Friday",
+        "confidence": 0.97
+      },
+      {
+        "utterance_index": 24,
+        "speaker_id": "SPEAKER_03",
+        "commitment_text": "SPEAKER_03 will send a formal email to the product manager today evening, communicating the payment gateway dependency and its timeline impact.",
+        "owner": "SPEAKER_03",
+        "deadline_mentioned": "today evening",
+        "confidence": 0.96
+      },
+      {
+        "utterance_index": 28,
+        "speaker_id": "SPEAKER_00",
+        "commitment_text": "SPEAKER_01 will write the rate limiter tests.",
+        "owner": "SPEAKER_01",
+        "deadline_mentioned": null,
+        "confidence": 0.9
+      },
+      {
+        "utterance_index": 28,
+        "speaker_id": "SPEAKER_00",
+        "commitment_text": "SPEAKER_02 will wire up the rate limiter tests in CI by Friday.",
+        "owner": "SPEAKER_02",
+        "deadline_mentioned": "Friday",
+        "confidence": 0.95
+      }
+    ]
+  },
+  "risks": {
+    "risks": [
+      {
+        "utterance_index": 1,
+        "speaker_id": "SPEAKER_01",
+        "risk_type": "technical_blocker",
+        "risk_text": "Underestimated complexity and unanticipated edge cases in API Gateway rate limiting module caused delays.",
+        "severity": "medium",
+        "mitigation_suggested": null,
+        "confidence": 0.9
+      },
+      {
+        "utterance_index": 2,
+        "speaker_id": "SPEAKER_02",
+        "risk_type": "technical_blocker",
+        "risk_text": "Staging environment Redis cluster configuration was incomplete, blocking testing for approximately 3 days.",
+        "severity": "high",
+        "mitigation_suggested": "Ankit to configure Redis Cluster mode on staging by Wednesday and prepare a rollback plan for production by Wednesday.",
+        "confidence": 0.95
+      },
+      {
+        "utterance_index": 5,
+        "speaker_id": "SPEAKER_01",
+        "risk_type": "ambiguity",
+        "risk_text": "Final decision on the rate limiting algorithm (token bucket vs. leaky bucket) had not been made.",
+        "severity": "medium",
+        "mitigation_suggested": "Team to make a final decision on the rate limiting algorithm today.",
+        "confidence": 0.85
+      },
+      {
+        "utterance_index": 9,
+        "speaker_id": "SPEAKER_02",
+        "risk_type": "scope_creep",
+        "risk_text": "Suggestion to add distributed tracing to the current sprint, which is outside the planned scope.",
+        "severity": "low",
+        "mitigation_suggested": "Defer distributed tracing to the next sprint to maintain focus on current sprint goals.",
+        "confidence": 0.8
+      },
+      {
+        "utterance_index": 12,
+        "speaker_id": "SPEAKER_01",
+        "risk_type": "technical_blocker",
+        "risk_text": "Critical blocker in DB migration Phase 2 due to an existing foreign key constraint not handled properly, posing a risk of production data corruption.",
+        "severity": "high",
+        "mitigation_suggested": "Push Phase 2 to next sprint; Priya to investigate the foreign key issue and prepare a fix proposal by Friday, including a dry run on staging.",
+        "confidence": 0.98
+      },
+      {
+        "utterance_index": 16,
+        "speaker_id": "SPEAKER_02",
+        "risk_type": "resource_constraint",
+        "risk_text": "Team is already stretched with current workload, questioning if all tasks can be completed within the remaining 2 weeks.",
+        "severity": "high",
+        "mitigation_suggested": "Drop some items from the sprint backlog to ensure quality and feasibility.",
+        "confidence": 0.95
+      },
+      {
+        "utterance_index": 18,
+        "speaker_id": "SPEAKER_03",
+        "risk_type": "missing_ownership",
+        "risk_text": "Logging and observability changes have no clear owner for the current sprint.",
+        "severity": "medium",
+        "mitigation_suggested": "Assign ownership or defer the task to a later sprint due to resource constraints.",
+        "confidence": 0.9
+      },
+      {
+        "utterance_index": 19,
+        "speaker_id": "SPEAKER_01",
+        "risk_type": "resource_constraint",
+        "risk_text": "Priya lacks time for logging changes due to critical DB investigation tasks.",
+        "severity": "medium",
+        "mitigation_suggested": "Reassign logging task or defer to next sprint.",
+        "confidence": 0.9
+      },
+      {
+        "utterance_index": 20,
+        "speaker_id": "SPEAKER_02",
+        "risk_type": "resource_constraint",
+        "risk_text": "Ankit also cannot take on logging changes due to existing commitments, stating the team cannot realistically handle the current workload.",
+        "severity": "high",
+        "mitigation_suggested": "Defer logging changes to the next sprint.",
+        "confidence": 0.95
+      },
+      {
+        "utterance_index": 21,
+        "speaker_id": "SPEAKER_00",
+        "risk_type": "dependency_risk",
+        "risk_text": "Payment gateway team's API contract is not yet finalized, blocking progress.",
+        "severity": "medium",
+        "mitigation_suggested": "Escalate the dependency to product manager and CTO.",
+        "confidence": 0.85
+      },
+      {
+        "utterance_index": 22,
+        "speaker_id": "SPEAKER_03",
+        "risk_type": "dependency_risk",
+        "risk_text": "Payment gateway contract not shared despite 3 follow-ups, blocking 4 sprint tasks and threatening next sprint's plan.",
+        "severity": "high",
+        "mitigation_suggested": "Sara to formally communicate dependency and timeline impact to product manager today; Rahul to update CTO.",
+        "confidence": 0.98
+      },
+      {
+        "utterance_index": 26,
+        "speaker_id": "SPEAKER_01",
+        "risk_type": "ambiguity",
+        "risk_text": "Unclear ownership for writing integration tests for the rate limiter in the CI pipeline.",
+        "severity": "low",
+        "mitigation_suggested": "Assign Priya to write tests and Ankit to configure CI pipeline by Friday.",
+        "confidence": 0.8
+      },
+      {
+        "utterance_index": 29,
+        "speaker_id": "SPEAKER_03",
+        "risk_type": "dependency_risk",
+        "risk_text": "The payment gateway contract dependency remains open, potentially requiring a sprint planning revisit if not received by Friday.",
+        "severity": "high",
+        "mitigation_suggested": "Team to remain aware of the ongoing risk and prepare for potential sprint planning adjustments.",
+        "confidence": 0.95
+      }
+    ],
+    "overall_meeting_risk_level": "critical",
+    "risk_summary": "The meeting reveals a critical level of risk, primarily driven by multiple high-impact technical blockers, severe resource constraints, and a critical external dependency. The team is stretched, facing significant delays due to an incomplete Redis cluster setup and a critical foreign key issue in DB migration, which poses a data corruption risk. Furthermore, a crucial payment gateway API contract remains unfinalized, blocking multiple sprint tasks and threatening future sprint planning. These issues collectively indicate a high likelihood of missed deadlines and potential quality degradation if not aggressively mitigated."
+  }
+}

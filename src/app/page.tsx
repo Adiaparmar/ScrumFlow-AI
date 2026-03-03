@@ -1,312 +1,343 @@
 'use client';
 
-import {
-  DASHBOARD_METRICS, RECENT_ALLOCATIONS, RECENT_MEETINGS_IMPORTANCE, ACCURACY_TREND,
-} from '@/lib/mockData';
-import { TopHeader } from '@/components/Navigation';
-import {
-  FolderOpen, CalendarCheck2, Clock3, CheckCheck,
-  TrendingUp, ArrowUpRight, ArrowDownRight, Info,
-} from 'lucide-react';
-import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-} from 'recharts';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Building2, Mail, Lock, User, ArrowRight, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 
-const METRICS = [
-  {
-    label: 'Active Projects',
-    value: DASHBOARD_METRICS.activeProjects,
-    icon: FolderOpen,
-    iconBg: '#1e3a5f',
-    iconColor: '#3b82f6',
-    change: '+1 this month',
-    direction: 'up',
-  },
-  {
-    label: 'Upcoming Meetings',
-    value: DASHBOARD_METRICS.upcomingMeetings,
-    icon: CalendarCheck2,
-    iconBg: '#2e1b5f',
-    iconColor: '#8b5cf6',
-    change: '+3 vs last week',
-    direction: 'up',
-  },
-  {
-    label: 'Pending Allocations',
-    value: DASHBOARD_METRICS.pendingAllocations,
-    icon: Clock3,
-    iconBg: '#3d2b0f',
-    iconColor: '#f59e0b',
-    change: '-4 vs yesterday',
-    direction: 'down',
-  },
-  {
-    label: 'Acceptance Rate',
-    value: `${DASHBOARD_METRICS.acceptanceRate}%`,
-    icon: CheckCheck,
-    iconBg: '#0f3323',
-    iconColor: '#10b981',
-    change: '+2.1% vs last 30d',
-    direction: 'up',
-  },
-];
+type Mode = 'login' | 'register';
 
-function CustomTooltip({ active, payload, label }: any) {
-  if (!active || !payload?.length) return null;
+interface FieldError { name?: string; email?: string; password?: string; confirm?: string; }
+
+export default function OrgPage() {
+  const router = useRouter();
+  const [mode, setMode] = useState<Mode>('login');
+  const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+  const [fieldErrors, setFieldErrors] = useState<FieldError>({});
+
+  const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '' });
+
+  function switchMode(m: Mode) {
+    setMode(m);
+    setServerError('');
+    setSuccessMsg('');
+    setFieldErrors({});
+    setForm({ name: '', email: '', password: '', confirm: '' });
+  }
+
+  function validate(): boolean {
+    const errs: FieldError = {};
+    if (mode === 'register' && !form.name.trim()) errs.name = 'Organisation name is required.';
+    if (!form.email.trim()) errs.email = 'Email is required.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = 'Enter a valid email address.';
+    if (!form.password) errs.password = 'Password is required.';
+    else if (form.password.length < 6) errs.password = 'Password must be at least 6 characters.';
+    if (mode === 'register' && form.password !== form.confirm) errs.confirm = 'Passwords do not match.';
+    setFieldErrors(errs);
+    return Object.keys(errs).length === 0;
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setServerError('');
+    setSuccessMsg('');
+    if (!validate()) return;
+
+    setLoading(true);
+    const endpoint = mode === 'login' ? '/api/org/login' : '/api/org/register';
+    const payload = mode === 'login'
+      ? { email: form.email, password: form.password }
+      : { name: form.name, email: form.email, password: form.password };
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setServerError(data.error || 'Something went wrong.');
+      } else {
+        sessionStorage.setItem('org', JSON.stringify(data.organization));
+        if (mode === 'register') {
+          setSuccessMsg(`Organisation "${data.organization.name}" registered! Redirecting…`);
+          setTimeout(() => router.push('/dashboard'), 1500);
+        } else {
+          router.push('/dashboard');
+        }
+      }
+    } catch {
+      setServerError('Network error. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
-    <div className="chart-tooltip">
-      <div className="chart-tooltip-label">{label}</div>
-      {payload.map((p: any) => (
-        <div key={p.dataKey} style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 3 }}>
-          <div style={{ width: 8, height: 8, borderRadius: '50%', background: p.color }} />
-          <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>{p.name}:</span>
-          <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: 13 }}>{p.value}%</span>
+    <div style={{
+      minHeight: '100vh',
+      background: 'var(--bg-primary)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '24px',
+      position: 'relative',
+      overflow: 'hidden',
+    }}>
+      {/* Background grid + glow */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        backgroundImage: 'linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px)',
+        backgroundSize: '48px 48px',
+        pointerEvents: 'none',
+      }} />
+      <div style={{
+        position: 'absolute', top: '-200px', left: '50%', transform: 'translateX(-50%)',
+        width: '600px', height: '600px',
+        background: 'radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 70%)',
+        pointerEvents: 'none',
+      }} />
+
+      <div style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '440px' }}>
+
+        {/* Logo */}
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: '10px',
+            marginBottom: '10px',
+          }}>
+            <div style={{
+              width: 40, height: 40,
+              background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+              borderRadius: '10px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              <Building2 size={20} color="#fff" />
+            </div>
+            <span style={{
+              fontSize: '22px', fontWeight: 800,
+              background: 'linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%)',
+              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+              letterSpacing: '-0.5px',
+            }}>
+              ScrumFlow<span style={{ color: '#3b82f6', WebkitTextFillColor: '#3b82f6' }}>.ai</span>
+            </span>
+          </div>
+          <p style={{ fontSize: '13px', color: 'var(--text-muted)', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+            Execution Intelligence Platform
+          </p>
         </div>
-      ))}
+
+        {/* Card */}
+        <div style={{
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border-primary)',
+          borderRadius: '16px',
+          padding: '36px',
+          boxShadow: '0 24px 48px rgba(0,0,0,0.4)',
+        }}>
+          {/* Mode Tabs */}
+          <div style={{
+            display: 'flex',
+            background: 'var(--bg-secondary)',
+            borderRadius: '10px',
+            padding: '3px',
+            marginBottom: '28px',
+          }}>
+            {(['login', 'register'] as Mode[]).map((m) => (
+              <button
+                key={m}
+                onClick={() => switchMode(m)}
+                style={{
+                  flex: 1, padding: '8px 0', fontSize: '13px', fontWeight: 600,
+                  borderRadius: '8px', border: 'none', cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  background: mode === m ? 'var(--bg-card)' : 'transparent',
+                  color: mode === m ? 'var(--text-primary)' : 'var(--text-muted)',
+                  boxShadow: mode === m ? '0 1px 4px rgba(0,0,0,0.3)' : 'none',
+                }}
+              >
+                {m === 'login' ? 'Sign In' : 'Register'}
+              </button>
+            ))}
+          </div>
+
+          {/* Title */}
+          <div style={{ marginBottom: '24px' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary)', margin: 0, marginBottom: '4px' }}>
+              {mode === 'login' ? 'Welcome back' : 'Create organisation'}
+            </h2>
+            <p style={{ fontSize: '13px', color: 'var(--text-muted)', margin: 0 }}>
+              {mode === 'login'
+                ? "Sign in to access your team's execution dashboard."
+                : 'Register your organisation to get started with AAES.'}
+            </p>
+          </div>
+
+          {/* Server error / success */}
+          {serverError && (
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: '8px',
+              background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)',
+              borderRadius: '8px', padding: '10px 12px', marginBottom: '20px',
+            }}>
+              <AlertCircle size={14} color="#ef4444" style={{ flexShrink: 0 }} />
+              <span style={{ fontSize: '12px', color: '#ef4444' }}>{serverError}</span>
+            </div>
+          )}
+          {successMsg && (
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: '8px',
+              background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.2)',
+              borderRadius: '8px', padding: '10px 12px', marginBottom: '20px',
+            }}>
+              <CheckCircle2 size={14} color="#10b981" style={{ flexShrink: 0 }} />
+              <span style={{ fontSize: '12px', color: '#10b981' }}>{successMsg}</span>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} noValidate>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+
+              {mode === 'register' && (
+                <OrgField
+                  id="org-name"
+                  label="Organisation Name"
+                  icon={<User size={14} color="var(--text-muted)" />}
+                  type="text"
+                  placeholder="e.g. Acme Corp"
+                  value={form.name}
+                  onChange={(v) => setForm((f) => ({ ...f, name: v }))}
+                  error={fieldErrors.name}
+                  autoComplete="organization"
+                />
+              )}
+
+              <OrgField
+                id="org-email"
+                label="Email Address"
+                icon={<Mail size={14} color="var(--text-muted)" />}
+                type="email"
+                placeholder="admin@company.com"
+                value={form.email}
+                onChange={(v) => setForm((f) => ({ ...f, email: v }))}
+                error={fieldErrors.email}
+                autoComplete="email"
+              />
+
+              <OrgField
+                id="org-password"
+                label="Password"
+                icon={<Lock size={14} color="var(--text-muted)" />}
+                type="password"
+                placeholder={mode === 'register' ? 'Min. 6 characters' : '••••••••'}
+                value={form.password}
+                onChange={(v) => setForm((f) => ({ ...f, password: v }))}
+                error={fieldErrors.password}
+                autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
+              />
+
+              {mode === 'register' && (
+                <OrgField
+                  id="org-confirm"
+                  label="Confirm Password"
+                  icon={<Lock size={14} color="var(--text-muted)" />}
+                  type="password"
+                  placeholder="Re-enter password"
+                  value={form.confirm}
+                  onChange={(v) => setForm((f) => ({ ...f, confirm: v }))}
+                  error={fieldErrors.confirm}
+                  autoComplete="new-password"
+                />
+              )}
+
+              <button
+                type="submit"
+                disabled={loading}
+                style={{
+                  marginTop: '4px',
+                  width: '100%', padding: '11px 0',
+                  background: 'linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)',
+                  border: 'none', borderRadius: '8px',
+                  color: '#fff', fontSize: '14px', fontWeight: 600,
+                  cursor: loading ? 'not-allowed' : 'pointer',
+                  opacity: loading ? 0.75 : 1,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+                  transition: 'opacity 0.2s',
+                }}
+              >
+                {loading
+                  ? <><Loader2 size={15} style={{ animation: 'spin 1s linear infinite' }} /> Processing…</>
+                  : <>{mode === 'login' ? 'Sign In' : 'Create Organisation'} <ArrowRight size={15} /></>
+                }
+              </button>
+            </div>
+          </form>
+        </div>
+
+        {/* Footer note */}
+        <p style={{ textAlign: 'center', fontSize: '11px', color: 'var(--text-muted)', marginTop: '20px' }}>
+          {mode === 'login'
+            ? 'New here? Switch to Register above to create your organisation.'
+            : 'Already registered? Switch to Sign In above.'}
+        </p>
+      </div>
+
+      <style>{`
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      `}</style>
     </div>
   );
 }
 
-const STATUS_COLORS: Record<string, string> = {
-  accepted: 'badge-green',
-  pending: 'badge-amber',
-  overridden: 'badge-violet',
-  rejected: 'badge-rose',
-};
-
-export default function DashboardPage() {
-  const trendData = ACCURACY_TREND.slice(-14);
-
+function OrgField({
+  id, label, icon, type, placeholder, value, onChange, error, autoComplete,
+}: {
+  id: string; label: string; icon: React.ReactNode;
+  type: string; placeholder: string; value: string;
+  onChange: (v: string) => void; error?: string; autoComplete?: string;
+}) {
+  const [focused, setFocused] = useState(false);
   return (
-    <>
-      <TopHeader title="Dashboard" subtitle="Overview" />
-      <div className="page-content animate-fade">
-        {/* Page Header */}
-        <div className="page-header">
-          <div className="page-header-left">
-            <h1>Welcome back, Alex 👋</h1>
-            <p>Here's what's happening across your projects today · Feb 20, 2026</p>
-          </div>
-          <div className="page-header-actions">
-            <button className="btn btn-secondary btn-sm">
-              <Info size={13} /> View Report
-            </button>
-            <button className="btn btn-primary btn-sm">
-              <TrendingUp size={13} /> Export
-            </button>
-          </div>
-        </div>
-
-        {/* Metric Cards */}
-        <div className="grid-4 section-gap">
-          {METRICS.map((m) => {
-            const Icon = m.icon;
-            return (
-              <div className="metric-card" key={m.label}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <div
-                    className="metric-icon"
-                    style={{ background: m.iconBg }}
-                  >
-                    <Icon size={17} color={m.iconColor} />
-                  </div>
-                  <div style={{
-                    fontSize: 10, fontWeight: 600, color: m.direction === 'up' ? 'var(--accent-emerald)' : 'var(--accent-amber)',
-                    display: 'flex', alignItems: 'center', gap: 3,
-                    background: m.direction === 'up' ? 'rgba(16,185,129,0.08)' : 'rgba(245,158,11,0.08)',
-                    padding: '3px 7px', borderRadius: 20,
-                  }}>
-                    {m.direction === 'up' ? <ArrowUpRight size={11} /> : <ArrowDownRight size={11} />}
-                    {m.change}
-                  </div>
-                </div>
-                <div className="metric-value">{m.value}</div>
-                <div className="metric-label">{m.label}</div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Charts Row */}
-        <div className="grid-2 section-gap">
-          {/* Model Accuracy Trend */}
-          <div className="card">
-            <div className="card-header">
-              <div>
-                <div className="card-title"><TrendingUp size={15} /> Model Accuracy Trend</div>
-                <div className="card-subtitle">Last 14 days · Daily accuracy</div>
-              </div>
-              <span className="badge badge-green">+2.1%</span>
-            </div>
-            <div className="chart-container" style={{ height: 200 }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={trendData} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(30,45,74,0.5)" />
-                  <XAxis
-                    dataKey="date"
-                    tick={{ fontSize: 10, fill: 'var(--text-muted)' }}
-                    tickLine={false}
-                    axisLine={false}
-                    interval={2}
-                  />
-                  <YAxis
-                    domain={[60, 100]}
-                    tick={{ fontSize: 10, fill: 'var(--text-muted)' }}
-                    tickLine={false}
-                    axisLine={false}
-                    tickFormatter={(v) => `${v}%`}
-                  />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Line
-                    type="monotone"
-                    dataKey="accuracy"
-                    name="Accuracy"
-                    stroke="#3b82f6"
-                    strokeWidth={2}
-                    dot={false}
-                    activeDot={{ r: 4, fill: '#3b82f6' }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-
-          {/* Override Rate Trend */}
-          <div className="card">
-            <div className="card-header">
-              <div>
-                <div className="card-title"><TrendingUp size={15} /> Override Rate Trend</div>
-                <div className="card-subtitle">Last 14 days · Daily override rate</div>
-              </div>
-              <span className="badge badge-green">▼ 1.3%</span>
-            </div>
-            <div className="chart-container" style={{ height: 200 }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={trendData} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(30,45,74,0.5)" />
-                  <XAxis
-                    dataKey="date"
-                    tick={{ fontSize: 10, fill: 'var(--text-muted)' }}
-                    tickLine={false}
-                    axisLine={false}
-                    interval={2}
-                  />
-                  <YAxis
-                    domain={[0, 40]}
-                    tick={{ fontSize: 10, fill: 'var(--text-muted)' }}
-                    tickLine={false}
-                    axisLine={false}
-                    tickFormatter={(v) => `${v}%`}
-                  />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Line
-                    type="monotone"
-                    dataKey="overrideRate"
-                    name="Override Rate"
-                    stroke="#f59e0b"
-                    strokeWidth={2}
-                    dot={false}
-                    activeDot={{ r: 4, fill: '#f59e0b' }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-        </div>
-
-        {/* Recent Tables Row */}
-        <div className="grid-2 section-gap">
-          {/* Recent Allocation Suggestions */}
-          <div className="card">
-            <div className="card-header">
-              <div>
-                <div className="card-title">Recent Allocation Suggestions</div>
-                <div className="card-subtitle">5 most recent · Sorted by latest</div>
-              </div>
-              <button className="btn btn-ghost btn-sm">View All</button>
-            </div>
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Task ID</th>
-                  <th>Assignee</th>
-                  <th>Confidence</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {RECENT_ALLOCATIONS.map((a) => (
-                  <tr key={a.id}>
-                    <td><span className="mono" style={{ color: 'var(--accent-blue-light)' }}>{a.taskId}</span></td>
-                    <td style={{ color: 'var(--text-secondary)' }}>{a.assignee}</td>
-                    <td>
-                      <div className="progress-bar-wrap">
-                        <div className="progress-bar-track" style={{ maxWidth: 60 }}>
-                          <div
-                            className="progress-bar-fill"
-                            style={{
-                              width: `${a.confidence}%`,
-                              background: a.confidence > 80 ? 'var(--accent-emerald)' : a.confidence > 60 ? 'var(--accent-amber)' : 'var(--accent-rose)',
-                            }}
-                          />
-                        </div>
-                        <span className="progress-value">{a.confidence}%</span>
-                      </div>
-                    </td>
-                    <td>
-                      <span className={`badge ${STATUS_COLORS[a.status] || 'badge-gray'}`}>
-                        {a.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Recent Meeting Importance */}
-          <div className="card">
-            <div className="card-header">
-              <div>
-                <div className="card-title">Meeting Importance Scores</div>
-                <div className="card-subtitle">5 most recent · Sorted by score</div>
-              </div>
-              <button className="btn btn-ghost btn-sm">View All</button>
-            </div>
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Meeting</th>
-                  <th>Project</th>
-                  <th>Importance</th>
-                </tr>
-              </thead>
-              <tbody>
-                {RECENT_MEETINGS_IMPORTANCE.map((m) => (
-                  <tr key={m.id}>
-                    <td style={{ maxWidth: 160 }}>
-                      <div style={{ fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                        {m.title}
-                      </div>
-                    </td>
-                    <td>
-                      <span className="badge badge-blue" style={{ fontSize: 10 }}>{m.project.split(' ')[0]}</span>
-                    </td>
-                    <td>
-                      <div className="importance-bar-wrap">
-                        <div className="importance-bar-track">
-                          <div className="importance-bar-fill" style={{ width: `${m.importanceScore}%` }} />
-                        </div>
-                        <span className="importance-pct">{m.importanceScore}%</span>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+    <div>
+      <label htmlFor={id} style={{
+        display: 'block', fontSize: '12px', fontWeight: 600,
+        color: 'var(--text-secondary)', marginBottom: '6px', letterSpacing: '0.3px',
+      }}>
+        {label}
+      </label>
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: '10px',
+        background: 'var(--bg-secondary)',
+        border: `1px solid ${error ? 'rgba(239,68,68,0.5)' : focused ? 'var(--accent-blue)' : 'var(--border-primary)'}`,
+        borderRadius: '8px', padding: '0 12px',
+        transition: 'border-color 0.15s',
+      }}>
+        {icon}
+        <input
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          autoComplete={autoComplete}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          style={{
+            flex: 1, padding: '10px 0',
+            background: 'transparent', border: 'none', outline: 'none',
+            color: 'var(--text-primary)', fontSize: '13px',
+          }}
+        />
       </div>
-    </>
+      {error && (
+        <p style={{ fontSize: '11px', color: '#ef4444', marginTop: '4px', marginLeft: '2px' }}>
+          {error}
+        </p>
+      )}
+    </div>
   );
 }

@@ -5,6 +5,7 @@
 ---
 
 ![ScrumFlow.ai](images/banner.png)
+
 *Meetings into Decisions. Decisions into Tasks. Automatically.*
 
 ---
@@ -209,7 +210,7 @@ There's an irony in using a spec-driven development tool to build a system whose
 
 The workflow is three steps:
 
-**1. Upload Meeting:** Users upload recordings (MP3, MP4, WAV) through the dashboard.
+**1. Upload Meeting:** The meet recording (MP3, MP4, WAV) gets uploaded through the extension.
 
 **2. AI Processing:** The system transcribes the meeting, runs diarization to attribute speech to speakers, and executes the multi-agent pipeline. Three agents run in parallel; the Task Generator runs after all three complete.
 
@@ -218,7 +219,7 @@ The workflow is three steps:
 ---
 
 ![AAES Pipeline Running](images/Screenshot%202026-03-08%20183446.png)
-*The AAES pipeline running in the terminal: phases, parallel agents with spinners, and the final summary panel*
+*The pipeline running in the terminal: phases, parallel agents with spinners, and the final summary panel*
 
 ---
 
@@ -277,10 +278,6 @@ The workflow is three steps:
 
 ---
 
-![Learning and Adaptation](images/Screenshot%202026-03-08%20173539.png)
-*Learning and Adaptation page tracking allocation accuracy, override rate, model drift score, and learning velocity over time*
-
----
 
 ## What I Learned
 
@@ -292,11 +289,8 @@ The frustration isn't the missed deadline. It's knowing the team did everything 
 
 **Infrastructure is harder than intelligence.** The most time-consuming challenges had nothing to do with prompts or models. They were about orchestration. Keeping SageMaker, S3, SQS, and RDS coordinated across an async multi-stage pipeline without losing data or creating silent failures is genuinely hard engineering. Building AI applications is less about what the model knows and more about whether the plumbing holds under pressure. Idempotency and observability are non-negotiable.
 
-**Structure unlocks automation.** Unstructured AI output is a dead end. The moment every agent was constrained to a strict JSON schema, the downstream pipeline became reliable. Tasks became queryable. Risks became trackable. The difference between a useful AI system and an interesting demo is whether the output can be acted on without a human interpreting it first.
-
 **Asynchronous architecture is not optional.** The first version processed everything synchronously. It worked for one meeting and fell apart under load. Introducing SQS to decouple transcription from analysis wasn't an optimization, it was a correctness fix. Upload spikes now get absorbed by the queue; failed stages retry independently.
 
-**The hardest problem isn't capturing decisions. It's making them stick.** Persistent Organizational Memory only works if it closes the loop. Decisions become tasks, tasks become completed work, and completion feeds back into the next planning cycle. Without that feedback loop, you're building a better archive. With it, you're building organizational intelligence that compounds over time.
 
 **Explicit structure accelerates development.** Kiro forced every requirement, design decision, and acceptance criterion to be explicit before implementation began. This prevented the class of bugs that come from informal assumptions, which is exactly the same problem ScrumFlow.ai solves for teams in meetings.
 

@@ -1,28 +1,24 @@
 # AIdeas: ScrumFlow.ai -- Intelligent Sprint Automation Tool
 
-**Team: MeetMinds AI**
-
----
-
 ![ScrumFlow.ai](images/scrumflow_banner.jpg)
 
 *Meetings into Decisions. Decisions into Tasks. Automatically.*
 
 ---
 
-Marcus closes his laptop at 10:47 AM. Sprint planning is done. Priorities locked, owners assigned, the database migration risk flagged and discussed. He heads to lunch feeling good.
+Rahul closes his laptop at 6:30 PM. Sprint planning ran long, the way it usually does. For an hour the team debated in the way Indian engineering teams actually talk: half English, half Hindi, switching mid-sentence without thinking about it. "Bhai, database migration ka risk seriously lete hain," someone said. Everyone nodded. The risk was real. The decision got made. The sprint scope was locked.
 
 Wednesday morning, his Slack lights up:
 
 > *"Hey, who's owning the integration task? I thought it was you."*
 > *"Are we shipping the auth feature this sprint or pushing it?"*
-> *"Did anyone follow up on the migration blocker?"*
+> *"Did anyone follow up on the migration blocker? Socha tha resolve ho gaya."*
 
 The meeting happened. The alignment didn't survive it.
 
 **Decisions made out loud don't count. Not until they're written down, owned, and tracked.**
 
-ScrumFlow.ai was built for exactly that moment: between the meeting ending and the work beginning.
+ScrumFlow.ai was built for exactly that moment: between the meeting ending and the work beginning. And it was built for teams that plan the way real teams do, not in clean, single-language transcripts, but in the fluid, code-switched conversations that most enterprise tools were never designed for.
 
 ---
 
@@ -51,6 +47,7 @@ A platform that processes sprint planning recordings through a multi-agent AI pi
 - **Commitment records:** who said they would do what, by when
 - **Tasks with dependencies:** generated from all of the above, ready for immediate execution
 - **Smart allocation suggestions:** matching tasks to team members by skill and availability
+- **Multilingual transcription:** Hinglish and code-switched speech handled natively, so teams that mix Hindi and English mid-sentence get accurate transcripts without pre-processing or language switching
 
 The core strategy combines three pillars:
 
@@ -59,6 +56,8 @@ The core strategy combines three pillars:
 **Persistent Organizational Memory:** Every meeting produces a structured record of what was decided, who committed, what risks were raised, and what needs to happen next. This is stored as queryable intelligence that compounds across sprints rather than expiring when the call ends.
 
 **Execution Feedback Loop:** Decisions flow into tickets, tickets into completed tasks, and completed tasks feed back into the next planning cycle. The system closes the loop automatically. Alignment doesn't just happen in the meeting; it drives execution after it.
+
+**Multilingual-First Transcription:** Real engineering teams in India often switch between Hindi and English mid-sentence. Most transcription systems handle one or the other. ScrumFlow.ai uses a fine-tuned Hinglish-specific model (Oriserve/Whisper-Hindi2Hinglish-Apex) that transcribes code-switched speech directly, without forcing teams to speak in a single language to get accurate output.
 
 ---
 
@@ -339,13 +338,10 @@ Every decision documented. Every commitment tracked. Every meeting building on t
 
 ## Article Tags
 
-**#aideas-2025** | **#workplace-efficiency** | **#APJC**
-
+**#aideas-2025** | **#workplace-efficiency** | **#APJC** | **#AI** | **#Agents** | **#MultimodalAI** | **#Multilingual**
 
 
 ## Team
-
-**MeetMinds AI**
 
 | Name | Email | GitHub |
 |---|---|---|
